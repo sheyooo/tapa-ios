@@ -195,6 +195,7 @@ class LoginVC: UIViewController {
         dontHaveAccount.setAttributedTitle(attributedString, for: .normal)
         
         skipButton.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+
         
     }
     

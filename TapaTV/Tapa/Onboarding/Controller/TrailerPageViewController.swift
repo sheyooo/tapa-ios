@@ -81,26 +81,36 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
     fileprivate func setupBottomControls() {
         let bottomControlsStackView = UIStackView(arrangedSubviews: [pageControl, nextButton])
         bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomControlsStackView.spacing = 20
+        bottomControlsStackView.spacing = 10
         bottomControlsStackView.axis = .vertical
         bottomControlsStackView.distribution = .fillEqually
         
         view.addSubview(bottomControlsStackView)
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
-                bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+                bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
                 bottomControlsStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
                 bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
                 bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
                 ])
         } else {
             // Fallback on earlier versions
-            NSLayoutConstraint.activate([
-                bottomControlsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-                bottomControlsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
-                bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
-                ])
+            if #available(iOS 11.0, *) {
+                NSLayoutConstraint.activate([
+                    bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+                    bottomControlsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
+                    bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
+                    ])
+            } else {
+                // Fallback on earlier versions
+                NSLayoutConstraint.activate([
+                    bottomControlsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+                    bottomControlsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
+                    bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
+                    ])
+            }
         }
         
         view.addSubview(getStartButton)
@@ -115,7 +125,11 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
         super.viewDidLoad()
         
         setupBottomControls()
-        
+        if #available(iOS 11.0, *) {
+            collectionView?.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.showsHorizontalScrollIndicator = false

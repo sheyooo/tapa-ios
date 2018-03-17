@@ -14,21 +14,47 @@ class MoviesHeaderView: UIView, UIScrollViewDelegate {
     
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     
-    private var collectionView: ScalingCarouselView!
+    private var collectionView: ScalingCarouselView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = ScalingCarouselView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isPagingEnabled = true
+        collectionView.backgroundColor = .clear
+        collectionView.inset = 20
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Orange is the New black"
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "Avenir-Black", size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "When I open the listing details, it shows the type of storage as the title of the listing. Instead, have the title of the space shown above the name of the storage host. As for the type of the space, show it underneath the height. So... it will look like this"
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Avenir", size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        collectionView = ScalingCarouselView(withFrame: CGRect(x: 50, y: 0, width: frame.width - 50, height: frame.height), andInset: 40)
-        collectionView.center = self.center
-        collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.isPagingEnabled = true
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
         addSubview(collectionView)
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -42,6 +68,20 @@ class MoviesHeaderView: UIView, UIScrollViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        collectionView.topAnchor.align(to: topAnchor)
+        collectionView.leftAnchor.align(to: leftAnchor)
+        collectionView.rightAnchor.align(to: rightAnchor, offset: -20)
+        collectionView.heightAnchor.equal(to: frame.width / 2)
+        
+        titleLabel.topAnchor.align(to: collectionView.bottomAnchor, offset: 20)
+        titleLabel.leftAnchor.align(to: leftAnchor, offset: 0)
+        titleLabel.rightAnchor.align(to: rightAnchor, offset: -20)
+        titleLabel.heightAnchor.equal(to: 17)
+        
+        descriptionLabel.topAnchor.align(to: titleLabel.bottomAnchor, offset: 5)
+        descriptionLabel.leftAnchor.align(to: leftAnchor, offset: 0)
+        descriptionLabel.rightAnchor.align(to: rightAnchor, offset: -20)
+        descriptionLabel.bottomAnchor.align(to: bottomAnchor, offset: -10)
     }
 }
 
@@ -64,6 +104,7 @@ class ImageCell: ScalingCarouselCell {
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "woman_pc")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .red
@@ -77,7 +118,7 @@ class ImageCell: ScalingCarouselCell {
         mainView = UIView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height - 10))
         contentView.addSubview(mainView)
         mainView.addSubview(imageView)
-        imageView.elevate(elevation: 4.0, shadowColor: #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 0.5488013699))
+        imageView.elevate(elevation: 4.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5))
         imageView.layer.cornerRadius = 5
         
         imageView.leftAnchor.align(to: leftAnchor)

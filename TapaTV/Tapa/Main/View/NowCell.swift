@@ -13,7 +13,7 @@ class NowCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title of Movie (2018)".uppercased()
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.textColor = .white//#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.numberOfLines = 3
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
@@ -24,9 +24,9 @@ class NowCell: UICollectionViewCell {
     
     private lazy var videoThumbNail: UIImageView = {
         let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "gorillaman")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .cyan
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()

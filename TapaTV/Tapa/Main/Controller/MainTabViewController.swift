@@ -16,7 +16,7 @@ class MainTabViewController: UITabBarController {
     }
     
     private func configure(){
-        //tabBar.backgroundColor = UIColor(red: 35/255, green: 35/255, blue: 35/255.0, alpha: 1)
+        tabBar.backgroundColor = .black
         
         //tabBar.isTranslucent = false
         

@@ -25,6 +25,7 @@ class NowMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewD
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
         addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self

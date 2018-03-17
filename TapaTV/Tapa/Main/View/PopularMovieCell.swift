@@ -25,6 +25,7 @@ class PopularMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
         addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -80,12 +81,12 @@ class PopularMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        let paddingSpace = sectionInsets.left * (2 + 1)
+//        let availableWidth = collectionView.frame.width - paddingSpace
+//        let widthPerItem = availableWidth / 2
         
-        let paddingSpace = sectionInsets.left * (2 + 1)
-        let availableWidth = collectionView.frame.width - paddingSpace
-        let widthPerItem = availableWidth / 2
-        
-        return CGSize(width: widthPerItem - 20, height: 220)
+        return CGSize(width: frame.height - 80, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView,
