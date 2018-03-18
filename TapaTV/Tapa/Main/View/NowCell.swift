@@ -22,10 +22,11 @@ class NowCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var videoThumbNail: UIImageView = {
-        let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "gorillaman")
+    lazy var videoThumbNail: DesignableImageView = {
+        let iv = DesignableImageView()
         iv.contentMode = .scaleAspectFill
+        iv.cornerRadius = 10
+        iv.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), cornerRadius: 10)
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -35,8 +36,13 @@ class NowCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubview(titleLabel)
         addSubview(videoThumbNail)
-        videoThumbNail.layer.cornerRadius = 5
-        videoThumbNail.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5))
+        elevate(elevation: 5.0, shadowColor: #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), cornerRadius: 10)
+        clipsToBounds = true
+        
+        videoThumbNail.shadowColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        videoThumbNail.shadowOpacity = 0.5
+        videoThumbNail.shadowRadius = 10
+        videoThumbNail.clipsToBounds = true
     }
     
     override func layoutSubviews() {
@@ -47,10 +53,10 @@ class NowCell: UICollectionViewCell {
         titleLabel.rightAnchor.align(to: rightAnchor, offset: -5)
         titleLabel.bottomAnchor.align(to: bottomAnchor, offset: -5)
         
-        videoThumbNail.topAnchor.align(to: topAnchor, offset: 5)
-        videoThumbNail.leftAnchor.align(to: leftAnchor)
-        videoThumbNail.rightAnchor.align(to: rightAnchor)
-        videoThumbNail.bottomAnchor.align(to: titleLabel.topAnchor, offset: -10)
+        videoThumbNail.topAnchor.align(to: topAnchor, offset: 10)
+        videoThumbNail.leftAnchor.align(to: leftAnchor, offset: 0)
+        videoThumbNail.rightAnchor.align(to: rightAnchor, offset: -0)
+        videoThumbNail.bottomAnchor.align(to: titleLabel.topAnchor, offset: -20)
     }
     
     required init?(coder aDecoder: NSCoder) {

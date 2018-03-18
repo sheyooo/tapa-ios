@@ -19,8 +19,8 @@ class PopularTVCell: UITableViewCell {
         return label
     }()
     
-    private lazy var videoThumbNail: UIImageView = {
-        let iv = UIImageView()
+    private lazy var videoThumbNail: DesignableImageView = {
+        let iv = DesignableImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .red
@@ -32,8 +32,6 @@ class PopularTVCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(titleLabel)
         addSubview(videoThumbNail)
-        videoThumbNail.layer.cornerRadius = 10
-        videoThumbNail.elevate(elevation: 4.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5))
     }
     
     override func layoutSubviews() {

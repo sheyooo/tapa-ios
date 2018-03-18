@@ -1,0 +1,6 @@
+framework module FCCarouselView {
+  umbrella header "FCCarouselView-umbrella.h"
+
+  export *
+  module * { export * }
+}

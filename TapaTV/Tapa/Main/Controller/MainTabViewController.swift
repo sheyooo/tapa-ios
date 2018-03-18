@@ -15,6 +15,13 @@ class MainTabViewController: UITabBarController {
         configure()
     }
     
+    override func viewDidLayoutSubviews() {
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.height = Constant.isCompact(view: view, yes: 50, no: 60)
+        tabFrame.origin.y = self.view.frame.size.height - Constant.isCompact(view: view, yes: 50, no: 60)
+        self.tabBar.frame = tabFrame
+    }
+    
     private func configure(){
         tabBar.backgroundColor = .black
         
@@ -24,7 +31,7 @@ class MainTabViewController: UITabBarController {
         setupBarItems()
         let tabBarItemApperance = UITabBarItem.appearance()
         tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: UIColor.gray], for: .normal)
-        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: primaryColor], for: .selected)
+        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: UIColor.white], for: .selected)
     }
     
     private func setupBarItems(){

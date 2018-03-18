@@ -68,6 +68,7 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
         let nextIndex = max(pageControl.currentPage - 1, 0)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
+        configButtons(indexPath: indexPath)
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
@@ -75,49 +76,29 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
         let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
+        configButtons(indexPath: indexPath)
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     fileprivate func setupBottomControls() {
-        let bottomControlsStackView = UIStackView(arrangedSubviews: [pageControl, nextButton])
-        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomControlsStackView.spacing = 10
-        bottomControlsStackView.axis = .vertical
-        bottomControlsStackView.distribution = .fillEqually
-        
-        view.addSubview(bottomControlsStackView)
-        if #available(iOS 11.0, *) {
-            NSLayoutConstraint.activate([
-                bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-                bottomControlsStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
-                bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
-                ])
-        } else {
-            // Fallback on earlier versions
-            if #available(iOS 11.0, *) {
-                NSLayoutConstraint.activate([
-                    bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-                    bottomControlsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
-                    bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
-                    ])
-            } else {
-                // Fallback on earlier versions
-                NSLayoutConstraint.activate([
-                    bottomControlsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-                    bottomControlsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    bottomControlsStackView.widthAnchor.constraint(equalToConstant: 150),
-                    bottomControlsStackView.heightAnchor.constraint(equalToConstant: 100)
-                    ])
-            }
-        }
-        
+        view.addSubview(pageControl)
+        view.addSubview(nextButton)
         view.addSubview(getStartButton)
+        
+        nextButton.bottomAnchor.align(to: view.bottomAnchor, offset: -20)
+        nextButton.widthAnchor.equal(to: 150)
+        nextButton.heightAnchor.equal(to: 40)
+        nextButton.centerXAnchor.align(to: view.centerXAnchor)
+        
         getStartButton.bottomAnchor.align(to: view.bottomAnchor, offset: -20)
         getStartButton.widthAnchor.equal(to: 150)
         getStartButton.heightAnchor.equal(to: 40)
         getStartButton.centerXAnchor.align(to: view.centerXAnchor)
+        
+        pageControl.bottomAnchor.align(to: nextButton.topAnchor, offset: -20)
+        pageControl.widthAnchor.equal(to: 150)
+        pageControl.heightAnchor.equal(to: 20)
+        pageControl.centerXAnchor.align(to: view.centerXAnchor)
     }
     
     
@@ -175,6 +156,25 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
         }
     }
     
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+        guard let collectionView = collectionView else {return}
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        guard let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
+        configButtons(indexPath: visibleIndexPath)
+    }
+    
+    func configButtons(indexPath: IndexPath){
+        getStartButton.isHidden = (indexPath.item == pages.count - 1) ? false : true
+        getStartButton.isEnabled = (indexPath.item == pages.count - 1) ? true : false
+        nextButton.alpha = (indexPath.item == pages.count - 1) ? 0 : 1
+        nextButton.isEnabled = (indexPath.item == pages.count - 1) ? false : true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
@@ -192,12 +192,6 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        getStartButton.isHidden = (indexPath.item == pages.count - 1) ? false : true
-        getStartButton.isEnabled = (indexPath.item == pages.count - 1) ? true : false
-        nextButton.alpha = (indexPath.item == pages.count - 1) ? 0 : 1
-        nextButton.isEnabled = (indexPath.item == pages.count - 1) ? false : true
-    }
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

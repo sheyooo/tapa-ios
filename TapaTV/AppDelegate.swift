@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
+        UITabBar.appearance().barTintColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let swipingController = TrailerPageViewController(collectionViewLayout: layout)
@@ -52,5 +54,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    class func isIPhone5 () -> Bool{
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 568.0
+    }
+    class func isIPhone6 () -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 667.0
+    }
+    class func isIPhone6Plus () -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 736.0
+    }
+    
+    class func isiPad() -> Bool {
+        if !(isIPhone5() || isIPhone6() || isIPhone6Plus()) {
+            return true
+        }
+        return false
+    }
 }
 

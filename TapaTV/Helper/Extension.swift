@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-let primaryColor = #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 1)
+let primaryColor = #colorLiteral(red: 0.2, green: 0.2039215686, blue: 0.262745098, alpha: 1)
 
 protocol MaterialView {
-    func elevate(elevation: Double, shadowColor: UIColor)
+    func elevate(elevation: Double, shadowColor: UIColor, cornerRadius: CGFloat?)
 }
 
 extension UIView {
@@ -209,11 +209,12 @@ extension UIImage {
 }
 
 extension UIView: MaterialView {
-    func elevate(elevation: Double, shadowColor: UIColor) {
-        self.layer.masksToBounds = false
+    func elevate(elevation: Double, shadowColor: UIColor, cornerRadius: CGFloat?) {
+        self.layer.masksToBounds = true
         self.layer.shadowColor = shadowColor.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: elevation)
-        self.layer.shadowOpacity = 1.24
+        self.layer.shadowOpacity = 2.24
+        self.layer.cornerRadius = cornerRadius ?? 0
         self.layer.shadowRadius = abs(CGFloat(elevation))
     }
 }

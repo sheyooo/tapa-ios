@@ -8,6 +8,12 @@
 
 import UIKit
 
+public enum AutoScrollOption {
+    case enable(Bool)
+    case timeInterval(Foundation.TimeInterval)
+}
+
+
 class PageCell: UICollectionViewCell {
     
     var page: Page? {

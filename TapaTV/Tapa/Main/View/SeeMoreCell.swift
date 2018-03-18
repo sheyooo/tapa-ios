@@ -34,11 +34,10 @@ class SeeMoreCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var videoThumbNail: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        iv.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.7960784314, blue: 0.1843137255, alpha: 1)
+    private lazy var videoThumbNail: DesignableImageView = {
+        let iv = DesignableImageView()
+        iv.cornerRadius = 10
+        iv.backgroundColor = #colorLiteral(red: 0.9269114848, green: 0.8422334162, blue: 0.04974014119, alpha: 1)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -48,8 +47,14 @@ class SeeMoreCell: UICollectionViewCell {
         addSubview(titleLabel)
         addSubview(videoThumbNail)
         addSubview(label)
-        videoThumbNail.layer.cornerRadius = 5
-        videoThumbNail.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5))
+        
+        elevate(elevation: 5.0, shadowColor: #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), cornerRadius: 10)
+        clipsToBounds = true
+        
+        videoThumbNail.shadowColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        videoThumbNail.shadowOpacity = 0.5
+        videoThumbNail.shadowRadius = 10
+        videoThumbNail.clipsToBounds = true
     }
     
     override func layoutSubviews() {

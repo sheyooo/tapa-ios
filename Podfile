@@ -13,5 +13,6 @@ target 'TapaTV' do
   pod 'Alamofire', '~> 4.5'
   pod 'KVNProgress', '~> 2.3.1'
   pod 'AlamofireImage', '~> 3.3'
+  pod 'FCCarouselView'
   pod 'EGFormValidator'
 end

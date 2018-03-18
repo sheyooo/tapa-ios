@@ -10,9 +10,9 @@ import UIKit
 
 class NowMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 15)
-    
     var viewController: UIViewController?
+    
+    var pages = [#imageLiteral(resourceName: "jumani"), #imageLiteral(resourceName: "lastjedi"), #imageLiteral(resourceName: "ohnoviginsa"), #imageLiteral(resourceName: "pirates"), #imageLiteral(resourceName: "spiderman"), #imageLiteral(resourceName: "starwars"), #imageLiteral(resourceName: "titanic")]
     
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -59,13 +59,13 @@ class NowMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return pages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        if indexPath.item == 4 {
+        if indexPath.item == pages.count - 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seeMoreCell", for: indexPath) as! SeeMoreCell
             //cell.backgroundColor = .blue
             
@@ -73,7 +73,7 @@ class NowMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewD
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! NowCell
             //cell.backgroundColor = .blue
-            
+            cell.videoThumbNail.image = pages[indexPath.item]
             return cell
         }
     }
@@ -86,20 +86,20 @@ class NowMovieCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: frame.height - 80, height: collectionView.frame.height)
+        let size = CGSize(width: Constant.isCompact(view: self, yes: frame.height - 80, no: frame.height - 100), height: Constant.isCompact(view: self, yes: collectionView.frame.height, no: collectionView.frame.height + 20))
+        return CGSize(width: size.width, height: size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Constant.isCompact(view: self, yes: 15, no: 25))
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.right
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Constant.isCompact(view: self, yes: 15, no: 25)).right
     }
     
 }
