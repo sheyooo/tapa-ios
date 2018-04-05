@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F385E49D8CD331DF156CB4D065D9519F"
+               BlueprintIdentifier = "A93C94EAF1CD767A0CC6712BB6CFA35C"
                BuildableName = "Pods_TapaTV.framework"
                BlueprintName = "Pods-TapaTV"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F385E49D8CD331DF156CB4D065D9519F"
+            BlueprintIdentifier = "A93C94EAF1CD767A0CC6712BB6CFA35C"
             BuildableName = "Pods_TapaTV.framework"
             BlueprintName = "Pods-TapaTV"
             ReferencedContainer = "container:Pods.xcodeproj">

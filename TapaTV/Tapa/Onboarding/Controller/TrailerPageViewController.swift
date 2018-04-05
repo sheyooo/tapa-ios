@@ -123,7 +123,8 @@ class TrailerPageViewController: UICollectionViewController, UICollectionViewDel
     
     @objc func handleGetStarted(){
         let vc = LoginVC()
-        present(vc, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {

@@ -20,14 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
+        IQKeyboardManager.sharedManager().enable = true
+        
         UITabBar.appearance().barTintColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let swipingController = TrailerPageViewController(collectionViewLayout: layout)
-        window?.rootViewController = swipingController
+        guard let _ = UserDefaults.standard.string(forKey: "token") else {
+            window?.rootViewController = swipingController
+            return true
+        }
+        window?.rootViewController = MainTabViewController()
         
-        IQKeyboardManager.sharedManager().enable = true
         return true
     }
 

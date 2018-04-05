@@ -35,7 +35,7 @@ class TVViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         
         self.tabBarItem.selectedImage = #imageLiteral(resourceName: "tv_icon").withRenderingMode(.alwaysOriginal)
         self.tabBarItem.image = #imageLiteral(resourceName: "tv_line_icon").withRenderingMode(.alwaysOriginal)

@@ -57,6 +57,10 @@ class SeeMoreCell: UICollectionViewCell {
         videoThumbNail.clipsToBounds = true
     }
     
+    @objc private func handleTap(){
+        
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

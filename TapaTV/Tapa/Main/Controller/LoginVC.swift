@@ -8,8 +8,10 @@
 
 import UIKit
 import PasswordTextField
+import EGFormValidator
+import KVNProgress
 
-class LoginVC: UIViewController {
+class LoginVC: ValidatorViewController {
     
     private lazy var coverImageView: UIImageView = {
         let iv = UIImageView()
@@ -42,6 +44,13 @@ class LoginVC: UIViewController {
     private lazy var coverView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var mainView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -92,8 +101,7 @@ class LoginVC: UIViewController {
         let label = UILabel()
         label.textColor = .red
         label.alpha = 1
-        label.text = "Error"
-        label.font = UIFont(name: "Arial", size: 12)
+        label.font = UIFont(name: "Arial", size: Constant.isCompact(view: view, yes: 12, no: 15))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -103,6 +111,8 @@ class LoginVC: UIViewController {
         textField.textColor = .white
         textField.setUnderline(color: #colorLiteral(red: 0.9646652919, green: 0.9646652919, blue: 0.9646652919, alpha: 1))
         textField.borderStyle = .none
+        textField.keyboardType = .emailAddress
+        textField.text = "sheyiadekoya@gmail.com"
         textField.autocapitalizationType = .none
         textField.attributedPlaceholder = NSAttributedString(string: "Email or Phone Number",
                                                              attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
@@ -121,8 +131,7 @@ class LoginVC: UIViewController {
         let label = UILabel()
         label.textColor = .red
         label.alpha = 1
-        label.text = "Error"
-        label.font = UIFont(name: "Arial", size: 12)
+        label.font = UIFont(name: "Arial", size: Constant.isCompact(view: view, yes: 12, no: 15))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -132,6 +141,7 @@ class LoginVC: UIViewController {
         textField.textColor = .white
         textField.imageTintColor = .white
         textField.borderStyle = .none
+        textField.text = "password"
         textField.attributedPlaceholder = NSAttributedString(string: "Password",
                                                              attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -187,20 +197,69 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
         [coverImageView, coverView].forEach {view.addSubview($0)}
+        coverView.addSubview(mainView)
         [logoImageView, logoTitleLabel, emailPhoneTextField,
-         emailLineView, passwordTextField, passwordLineView, forgotPassword, emailErrorLabel, passwordErrorLabel, skipButton, signInButton, dontHaveAccount].forEach{coverView.addSubview($0)}
+         emailLineView, passwordTextField, passwordLineView, forgotPassword, emailErrorLabel, passwordErrorLabel, skipButton, signInButton, dontHaveAccount].forEach{mainView.addSubview($0)}
         
         let buttonTitleStr = NSMutableAttributedString(string:"New User? Create Account", attributes:attrs)
         attributedString.append(buttonTitleStr)
         dontHaveAccount.setAttributedTitle(attributedString, for: .normal)
+
+        self.addValidatorMandatory(toControl: self.emailPhoneTextField, errorPlaceholder: self.emailErrorLabel, errorMessage: "This field is required")
+        self.addValidatorMandatory(toControl: self.passwordTextField, errorPlaceholder: self.passwordErrorLabel, errorMessage: "This field is required")
+        self.addValidatorEmail(toControl: self.emailPhoneTextField, errorPlaceholder: emailErrorLabel, errorMessage: "Email is invalid")
+        self.addValidatorMinLength(toControl: passwordTextField, errorPlaceholder: passwordErrorLabel, errorMessage: "Enter at least %d characters", minLength: 6)
         
         skipButton.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
-
+        signInButton.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
+        dontHaveAccount.addTarget(self, action: #selector(pushToSignUp), for: .touchUpInside)
         
+    }
+    
+    @objc fileprivate func pushToSignUp(){
+        let vc = SignupVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc fileprivate func handleSignIn(button: UIButton){
+        if self.validate() {
+            KVNProgress.show()
+            guard let email = emailPhoneTextField.text, let password = passwordTextField.text else {
+                return
+            }
+            let params = ["email": email, "password": password]
+            ApiService.shared.loginUser(with: params, completion: { (completed, message) in
+                KVNProgress.dismiss(completion: {
+                    if completed {
+                        KVNProgress.showSuccess(withStatus: message, completion: {
+                            Constant.keychain["password"] = password
+                            self.handleSkip(button: UIButton())
+                        })
+                    }else{
+                        KVNProgress.showError(withStatus: message)
+                    }
+                })
+            })
+        }
     }
     
     @objc fileprivate func handleSkip(button: UIButton){
         UIApplication.shared.keyWindow?.rootViewController = MainTabViewController()
+    }
+    
+    override var shouldAutorotate: Bool{
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,37 +272,42 @@ class LoginVC: UIViewController {
         coverImageView.fill(view)
         coverView.fill(view)
         
-        logoImageView.topAnchor.align(to: coverView.topAnchor, offset: 40)
-        logoImageView.centerXAnchor.align(to: coverView.centerXAnchor)
-        logoImageView.widthAnchor.equal(to: 50)
-        logoImageView.heightAnchor.equal(to: 50)
+        mainView.heightAnchor.equal(to: view.frame.height * 0.7)
+        mainView.widthAnchor.equal(to: view.frame.width * 0.9)
+        mainView.centerXAnchor.align(to: coverView.centerXAnchor)
+        mainView.centerYAnchor.align(to: coverView.centerYAnchor)
+        
+        logoImageView.topAnchor.align(to: mainView.topAnchor, offset: 40)
+        logoImageView.centerXAnchor.align(to: mainView.centerXAnchor)
+        logoImageView.widthAnchor.equal(to: Constant.isCompact(view: view, yes: 50, no: 100))
+        logoImageView.heightAnchor.equal(to: Constant.isCompact(view: view, yes: 50, no: 100))
         
         logoTitleLabel.widthAnchor.equal(to: 240)
         logoTitleLabel.topAnchor.align(to: logoImageView.bottomAnchor, offset: 20)
-        logoTitleLabel.centerXAnchor.align(to: view.centerXAnchor)
+        logoTitleLabel.centerXAnchor.align(to: mainView.centerXAnchor)
         logoTitleLabel.heightAnchor.equal(to: 16)
         
-        emailErrorLabel.fillTopLeftRightHeightCenterX(view, topView: logoTitleLabel, topOffset: 0, offest: 80, height: 15)
-        emailPhoneTextField.fillTopLeftRightHeightCenterX(view, topView: emailErrorLabel, topOffset: 0, offest: 80, height: 45)
-        emailLineView.fillTopLeftRightHeightCenterX(view, topView: emailPhoneTextField, topOffset: 0, offest: 80, height: 1)
+        emailErrorLabel.fillTopLeftRightHeightCenterX(mainView, topView: logoTitleLabel, topOffset: 60, offest: 40, height: Constant.isCompact(view: view, yes: 15, no: 20))
+        emailPhoneTextField.fillTopLeftRightHeightCenterX(mainView, topView: emailErrorLabel, topOffset: 0, offest: 40, height: 45)
+        emailLineView.fillTopLeftRightHeightCenterX(mainView, topView: emailPhoneTextField, topOffset: 0, offest: 40, height: 1)
         
-        passwordErrorLabel.fillTopLeftRightHeightCenterX(view, topView: emailLineView, topOffset: 10, offest: 80, height: 15)
+        passwordErrorLabel.fillTopLeftRightHeightCenterX(mainView, topView: emailLineView, topOffset: 40, offest: 40, height: Constant.isCompact(view: view, yes: 15, no: 20))
         
-        passwordTextField.fillTopLeftRightHeightCenterX(view, topView: passwordErrorLabel, topOffset: 0, offest: 80, height: 45)
-        passwordLineView.fillTopLeftRightHeightCenterX(view, topView: passwordTextField, topOffset: 0, offest: 80, height: 1)
+        passwordTextField.fillTopLeftRightHeightCenterX(mainView, topView: passwordErrorLabel, topOffset: 0, offest: 40, height: 45)
+        passwordLineView.fillTopLeftRightHeightCenterX(mainView, topView: passwordTextField, topOffset: 0, offest: 40, height: 1)
         
-        forgotPassword.bottomAnchor.align(to: passwordLineView.bottomAnchor, offset: -20)
-        forgotPassword.rightAnchor.align(to: view.rightAnchor, offset: -80)
+        forgotPassword.bottomAnchor.align(to: passwordLineView.bottomAnchor, offset: -40)
+        forgotPassword.rightAnchor.align(to: mainView.rightAnchor, offset: -40)
         forgotPassword.heightAnchor.equal(to: 45)
         forgotPassword.widthAnchor.equal(to: 130)
         
-        signInButton.topAnchor.align(to: passwordLineView.bottomAnchor, offset: 20)
-        signInButton.centerXAnchor.align(to: view.centerXAnchor)
+        signInButton.topAnchor.align(to: passwordLineView.bottomAnchor, offset: 50)
+        signInButton.centerXAnchor.align(to: mainView.centerXAnchor)
         signInButton.widthAnchor.equal(to: 150)
         signInButton.heightAnchor.equal(to: 45)
         
         dontHaveAccount.topAnchor.align(to: signInButton.bottomAnchor, offset: 0)
-        dontHaveAccount.centerXAnchor.align(to: view.centerXAnchor)
+        dontHaveAccount.centerXAnchor.align(to: mainView.centerXAnchor)
         dontHaveAccount.widthAnchor.equal(to: 200)
         dontHaveAccount.heightAnchor.equal(to: 45)
         

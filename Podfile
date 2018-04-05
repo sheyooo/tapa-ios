@@ -14,5 +14,7 @@ target 'TapaTV' do
   pod 'KVNProgress', '~> 2.3.1'
   pod 'AlamofireImage', '~> 3.3'
   pod 'FCCarouselView'
-  pod 'EGFormValidator'
+  pod 'EGFormValidator'  
+  pod 'KeychainAccess'
+  pod 'Stripe'
 end

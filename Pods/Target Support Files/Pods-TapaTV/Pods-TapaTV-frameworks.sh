@@ -108,9 +108,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FCCarouselView/FCCarouselView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Player/Player.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ScalingCarousel/ScalingCarousel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
@@ -119,9 +121,11 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FCCarouselView/FCCarouselView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Player/Player.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ScalingCarousel/ScalingCarousel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
