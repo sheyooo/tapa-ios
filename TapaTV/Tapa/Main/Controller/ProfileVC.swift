@@ -327,7 +327,7 @@ public class AccountCell: UITableViewCell {
 }
         
 
-public class SubscriptionCell: UITableViewCell {
+public class SubscriptionCell: UITableViewCell, STPPaymentCardTextFieldDelegate {
     
     private lazy var subscriptionView: UIView = {
         let view = UIView()
@@ -442,9 +442,35 @@ public class SubscriptionCell: UITableViewCell {
         button.backgroundColor = #colorLiteral(red: 0, green: 0.4823529412, blue: 1, alpha: 1)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.alpha = 0.5
+        button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    public func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
+        if textField.isValid {
+            makePaymentButton.alpha = 1
+            makePaymentButton.isEnabled = true
+        }
+    }
+    
+    @objc private func makePayment(){
+        let card = paymentTextField.cardParams
+        STPAPIClient.shared().createToken(withCard: card) { (token, error) in
+            if let error = error {
+                print(error)
+            }
+            else if let token = token {
+                print(token)
+                self.chargeUsingToken(token: token)
+            }
+        }
+    }
+    
+    private func chargeUsingToken(token: STPToken) {
+        
+    }
 
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -457,7 +483,8 @@ public class SubscriptionCell: UITableViewCell {
         
         backgroundColor = .clear
         selectionStyle = .none
-        
+        paymentTextField.delegate = self
+        makePaymentButton.addTarget(self, action: #selector(makePayment), for: .touchUpInside)
     }
     
     public override func layoutSubviews() {

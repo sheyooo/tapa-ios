@@ -40,9 +40,9 @@ class MainTabViewController: UITabBarController {
         let nav1 = UINavigationController(rootViewController: controller1)
         nav1.toolbar.isHidden = true
         
-        let controller2 = TVViewController()
-        controller2.tabBarItem = UITabBarItem(title: "TV", image: #imageLiteral(resourceName: "tv_line_icon"), tag: 2)
-        let nav2 = UINavigationController(rootViewController: controller2)
+//        let controller2 = TVViewController()
+//        controller2.tabBarItem = UITabBarItem(title: "TV", image: #imageLiteral(resourceName: "tv_line_icon"), tag: 2)
+//        let nav2 = UINavigationController(rootViewController: controller2)
         
         let controller3 = ProfileVC()
         controller3.tabBarItem = UITabBarItem(title: "PROFILE", image: #imageLiteral(resourceName: "profile_line_icon"), tag: 3)
@@ -50,7 +50,7 @@ class MainTabViewController: UITabBarController {
         let nav3 = UINavigationController(rootViewController: controller3)
         nav3.title = ""
         
-        viewControllers = [nav1, nav2, nav3]
+        viewControllers = [nav1, nav3]
         
     }
 }
