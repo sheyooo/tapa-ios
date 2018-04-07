@@ -58,7 +58,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let titleSize: CGFloat = Constant.isCompact(view: view, yes: 45, no: 65)
-        titleLabel.topAnchor.align(to: view.topAnchor, offset: 25)
+        titleLabel.topAnchor.align(to: view.topAnchor, offset: 35)
         titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
         titleLabel.heightAnchor.equal(to: titleSize)
         titleLabel.widthAnchor.equal(to: 150)
@@ -88,13 +88,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if AppDelegate.isiPad() {
             tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
             tableView.widthAnchor.equal(to: view.frame.width * 0.75)
-            tableView.bottomAnchor.align(to: view.bottomAnchor)
+            tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
             tableView.centerXAnchor.align(to: view.centerXAnchor)
         }else{
             tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-            tableView.leftAnchor.align(to: view.leftAnchor)
-            tableView.rightAnchor.align(to: view.rightAnchor)
-            tableView.bottomAnchor.align(to: view.bottomAnchor)
+            tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
+            tableView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
+            tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
         }
     }
     

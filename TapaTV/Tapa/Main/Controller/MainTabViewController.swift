@@ -16,10 +16,10 @@ class MainTabViewController: UITabBarController {
     }
     
     override func viewDidLayoutSubviews() {
-        var tabFrame = self.tabBar.frame
-        tabFrame.size.height = Constant.isCompact(view: view, yes: 50, no: 60)
-        tabFrame.origin.y = self.view.frame.size.height - Constant.isCompact(view: view, yes: 50, no: 60)
-        self.tabBar.frame = tabFrame
+//        var tabFrame = self.tabBar.frame
+//        tabFrame.size.height = Constant.isCompact(view: view, yes: 50, no: 60)
+//        tabFrame.origin.y = self.view.frame.size.height - Constant.isCompact(view: view, yes: 50, no: 60)
+//        self.tabBar.frame = tabFrame
     }
     
     private func configure(){

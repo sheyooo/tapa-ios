@@ -66,7 +66,7 @@ class MoviesVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size: CGFloat = (self.view.traitCollection.horizontalSizeClass == .compact) ? 45 : 65
-        titleLabel.topAnchor.align(to: view.topAnchor, offset: 25)
+        titleLabel.topAnchor.align(to: view.topAnchor, offset: 35)
         titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
         titleLabel.heightAnchor.equal(to: size)
         titleLabel.widthAnchor.equal(to: 150)
@@ -77,9 +77,9 @@ class MoviesVC: UIViewController {
         searchButton.widthAnchor.equal(to: size)
         
         tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 10)
-        tableView.leftAnchor.align(to: view.leftAnchor, offset: 20)
-        tableView.rightAnchor.align(to: view.rightAnchor, offset: -20)
-        tableView.bottomAnchor.align(to: view.bottomAnchor, offset: -30)
+        tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
+        tableView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
+        tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
     }
 }
 

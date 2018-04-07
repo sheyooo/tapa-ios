@@ -19,4 +19,13 @@ public class Constant {
     public static func isCompact(view: UIView, yes: CGFloat, no: CGFloat) -> CGFloat{
         return (!AppDelegate.isiPad()) ? yes : no
     }
+    
+    public static func isIphoneX() -> Bool {
+        if UIDevice().userInterfaceIdiom == .phone {
+            if UIScreen.main.nativeBounds.height == 2436 {
+                return true
+            }
+        }
+        return false
+    }
 }

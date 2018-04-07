@@ -73,9 +73,10 @@ extension AppDelegate {
     }
     
     class func isiPad() -> Bool {
-        if !(isIPhone5() || isIPhone6() || isIPhone6Plus()) {
+        if UIDevice().userInterfaceIdiom == .pad {
             return true
         }
+        
         return false
     }
 }
