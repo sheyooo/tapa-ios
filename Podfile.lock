@@ -2,24 +2,37 @@ PODS:
   - Alamofire (4.6.0)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
+  - BMPlayer (1.0.1):
+    - BMPlayer/Full (= 1.0.1)
+  - BMPlayer/Core (1.0.1)
+  - BMPlayer/Full (1.0.1):
+    - BMPlayer/Core
+    - NVActivityIndicatorView (~> 4.0.0)
+    - SnapKit (~> 4.0.0)
   - EGFormValidator (1.2.0)
   - FCCarouselView (1.0.7)
   - IQKeyboardManagerSwift (5.0.0)
   - KeychainAccess (3.1.0)
   - KVNProgress (2.3.1)
+  - NVActivityIndicatorView (4.0.1):
+    - NVActivityIndicatorView/Presenter (= 4.0.1)
+  - NVActivityIndicatorView/Presenter (4.0.1)
   - PasswordTextField (1.0.5)
   - Player (0.8.4)
   - ScalingCarousel (2.0.3)
+  - SnapKit (4.0.0)
   - Stripe (12.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - AlamofireImage (~> 3.3)
+  - BMPlayer (~> 1.0.0)
   - EGFormValidator
   - FCCarouselView
   - IQKeyboardManagerSwift (= 5.0.0)
   - KeychainAccess
   - KVNProgress (~> 2.3.1)
+  - NVActivityIndicatorView
   - PasswordTextField
   - Player (~> 0.8.0)
   - ScalingCarousel
@@ -28,16 +41,19 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  BMPlayer: 44eebf06eb01450dd14ea74b27d07c5222f0eed1
   EGFormValidator: 77ef9400bb37f6048dc2c1896f1086dac86efe74
   FCCarouselView: f998bbad5db363451e8e2a45b1e6c276942bd18f
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
+  NVActivityIndicatorView: 77ed6d7b571643e24899e7858bf9ae2ee4c21f31
   PasswordTextField: 1c19b7a67574872a0d41ae21f04664bcc339d76e
   Player: e45514e9e5fb8ff18f50eb2ba6f84dac9b6a0024
   ScalingCarousel: 023450cd1a8f1bd7d13a8edbddc956ded8ed1891
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Stripe: de8bffa8e6813f678d526c52f416fe224141fa09
 
-PODFILE CHECKSUM: 891aa11b4eeca16516e4fc196e5288a0220567ea
+PODFILE CHECKSUM: 34861e3a12a616230f1d557dc94f91e4c97d0fa5
 
 COCOAPODS: 1.3.1

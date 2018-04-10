@@ -265,8 +265,8 @@ public class AccountCell: UITableViewCell {
     public override func layoutSubviews() {
         super.layoutSubviews()
         accountView.topAnchor.align(to: topAnchor)
-        accountView.leftAnchor.align(to: leftAnchor, offset: 20)
-        accountView.rightAnchor.align(to: rightAnchor, offset: -20)
+        accountView.leftAnchor.align(to: leftAnchor)
+        accountView.rightAnchor.align(to: rightAnchor)
         accountView.bottomAnchor.align(to: bottomAnchor, offset: -10)
         
         let accountSize: CGFloat = Constant.isCompact(view: self, yes: 45, no: 65)
@@ -490,8 +490,8 @@ public class SubscriptionCell: UITableViewCell, STPPaymentCardTextFieldDelegate 
     public override func layoutSubviews() {
         super.layoutSubviews()
         subscriptionView.topAnchor.align(to: topAnchor)
-        subscriptionView.leftAnchor.align(to: leftAnchor, offset: 20)
-        subscriptionView.rightAnchor.align(to: rightAnchor, offset: -20)
+        subscriptionView.leftAnchor.align(to: leftAnchor)
+        subscriptionView.rightAnchor.align(to: rightAnchor)
         subscriptionView.bottomAnchor.align(to: bottomAnchor, offset: -20)
         
         subscriptionLabel.topAnchor.align(to: subscriptionView.topAnchor)

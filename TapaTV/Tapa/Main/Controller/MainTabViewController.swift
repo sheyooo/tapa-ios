@@ -35,7 +35,7 @@ class MainTabViewController: UITabBarController {
     }
     
     private func setupBarItems(){
-        let controller1 = MoviesVC()
+        let controller1 = MovieVC()
         controller1.tabBarItem = UITabBarItem(title: "MOVIES", image: #imageLiteral(resourceName: "movie_fill_icon"), tag: 1)
         let nav1 = UINavigationController(rootViewController: controller1)
         nav1.toolbar.isHidden = true

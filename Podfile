@@ -11,10 +11,13 @@ target 'TapaTV' do
   pod 'PasswordTextField'
   pod 'IQKeyboardManagerSwift', '5.0.0'
   pod 'Alamofire', '~> 4.5'
+  pod 'AlamofireImage', '~> 3.3'
   pod 'KVNProgress', '~> 2.3.1'
   pod 'AlamofireImage', '~> 3.3'
   pod 'FCCarouselView'
   pod 'EGFormValidator'  
   pod 'KeychainAccess'
   pod 'Stripe'
+  pod 'BMPlayer', '~> 1.0.0'
+  pod 'NVActivityIndicatorView'
 end

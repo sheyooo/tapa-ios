@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A93C94EAF1CD767A0CC6712BB6CFA35C"
+               BlueprintIdentifier = "54B2FF77F9C2E644BC7800D61B7ADC13"
                BuildableName = "Pods_TapaTV.framework"
                BlueprintName = "Pods-TapaTV"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A93C94EAF1CD767A0CC6712BB6CFA35C"
+            BlueprintIdentifier = "54B2FF77F9C2E644BC7800D61B7ADC13"
             BuildableName = "Pods_TapaTV.framework"
             BlueprintName = "Pods-TapaTV"
             ReferencedContainer = "container:Pods.xcodeproj">

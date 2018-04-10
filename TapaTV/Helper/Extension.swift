@@ -266,6 +266,24 @@ extension TimeInterval {
     }
 }
 
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String, font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: font, .foregroundColor: textColor]
+        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(boldString)
+        
+        return self
+    }
+    
+    @discardableResult func normal(_ text: String, font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: font, .foregroundColor: textColor]
+        let normal = NSAttributedString(string: text, attributes: attrs)
+        append(normal)
+        
+        return self
+    }
+}
+
 class ButtonWithImage: UIButton {
     
     override func layoutSubviews() {

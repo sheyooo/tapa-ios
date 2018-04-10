@@ -10,6 +10,8 @@ import UIKit
 
 class MoviesVC: UIViewController {
     
+    var movies = [Movie]()
+    
     fileprivate lazy var searchButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "search_icon").maskWithColor(color: .white), for: .normal)
@@ -86,7 +88,7 @@ class MoviesVC: UIViewController {
 extension MoviesVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

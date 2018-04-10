@@ -117,4 +117,35 @@ public class ApiService: NSObject {
         }
     }
     
+    func fetchMovieList(completion: @escaping ([Movie]?, _ message: String) -> ()){
+        
+        let urlString = Constant.BASE_URL + "movies"
+        let url = URL(string: urlString)!
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 40
+        configuration.timeoutIntervalForResource = 40
+        alamoFireManager = Alamofire.SessionManager(configuration: configuration)
+        alamoFireManager?.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil)
+            .responseJSON { (response) in
+               
+                guard response.result.isSuccess else {
+                    completion(nil, "Network connection error!")
+                    return
+                }
+                
+                guard let value = response.result.value as? [[String: Any]] else {
+                    //print("Malformed data received from user service")
+                    completion(nil, "Network connection error!")
+                    return
+                }
+                
+                let movies = value.compactMap {return Movie($0)}
+                
+                DispatchQueue.main.async {
+                    completion(movies, "success")
+                }
+        }
+        
+    }
+    
 }
