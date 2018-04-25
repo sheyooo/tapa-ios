@@ -30,7 +30,7 @@ class NowCell: UICollectionViewCell {
         label.numberOfLines = 3
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.font = UIFont(name: "Avenir-Black", size: 14)
+        label.font = UIFont(name: "Avenir-Black", size: Constant.isCompact(view: self, yes: 14, no: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

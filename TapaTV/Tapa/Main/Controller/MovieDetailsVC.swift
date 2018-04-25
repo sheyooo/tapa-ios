@@ -94,10 +94,11 @@ extension MovieDetailsVC:  UITableViewDelegate, UITableViewDataSource {
             width = view.layoutMarginsGuide.layoutFrame.width
         }
 
-        let text1 = "Spider-man: Homecomming"
-        let text2 = "Based on my experiences with hundreds of Europeans, many of them close friends, they believe Americans are hard right, as stated above they feel Obama was a Centrist or right winger. They see Republicans as semi-fascist and Trump as even more to the right of that."
-        return 343 + text1.height(withConstrainedWidth: (width / 2) + 20, font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self.view, yes: 22, no: 32))) +
-            text2.height(withConstrainedWidth: (width - 20), font: UIFont.systemFont(ofSize: Constant.isCompact(view: self.view, yes: 12, no: 14))) + 50 + 100
+       
+        let text1 = movie!.title
+        let text2 = movie!.contentDescription
+        return 343 + text1.height(withConstrainedWidth: (width / 2) + 20, font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self.view, yes: 22, no: 42))) +
+            text2.height(withConstrainedWidth: (width - 20), font: UIFont.systemFont(ofSize: Constant.isCompact(view: self.view, yes: 12, no: 18))) + 50 + 100
         
     }
     
@@ -139,7 +140,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         let label = UILabel()
         label.text = "Action, Adventure, Sci-Fi"
         label.textColor = UIColor(white: 1, alpha: 0.5)
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 14, no: 16))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 14, no: 24))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -148,7 +149,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         let label = UILabel()
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 22, no: 32))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 22, no: 42))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -157,7 +158,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         let label = UILabel()
         label.text = "2h 13m"
         label.textColor = UIColor(white: 1, alpha: 0.5)
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 14))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -166,7 +167,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         let label = UILabel()
         label.text = "12 +"
         label.textColor = UIColor(white: 1, alpha: 0.5)
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 14))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 18))
         label.textAlignment = .center
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor(white: 1, alpha: 0.3).cgColor
@@ -180,7 +181,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         label.text = "6 July 2017"
         label.textColor = UIColor(white: 1, alpha: 0.5)
         //        label.textAlignment = .right
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 14))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -191,8 +192,8 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         label.textColor = UIColor(white: 1, alpha: 0.5)
         let stringFormatting = NSMutableAttributedString()
         stringFormatting
-            .normal("Rating: ", font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 14, no: 18)), textColor: UIColor(white: 1, alpha: 0.5))
-            .bold("9.7", font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 16, no: 22)), textColor: UIColor(white: 1, alpha: 0.5))
+            .normal("Rating: ", font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 14, no: 22)), textColor: UIColor(white: 1, alpha: 0.5))
+            .bold("9.7", font: UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 16, no: 24)), textColor: UIColor(white: 1, alpha: 0.5))
         
         label.attributedText = stringFormatting
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -204,7 +205,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         label.numberOfLines = 0
         label.textColor = UIColor(white: 1, alpha: 0.8)
         //        label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 14))
+        label.font = UIFont.systemFont(ofSize: Constant.isCompact(view: self, yes: 12, no: 18))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -214,7 +215,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         label.text = "Casts"
         label.textColor = UIColor(white: 1, alpha: 1)
         //        label.textAlignment = .right
-        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 16, no: 18))
+        label.font = UIFont.boldSystemFont(ofSize: Constant.isCompact(view: self, yes: 16, no: 22))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -240,7 +241,6 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
     @objc private func handlePlayVideo(){
         guard let movie = movie else {return}
         let vc = StreamTvVC()
-        print(movie.video?.title)
         vc.video = movie.video
         movieDetailsVC?.navigationController?.pushViewController(vc, animated: true)
     }
