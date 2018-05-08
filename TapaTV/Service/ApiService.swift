@@ -49,6 +49,21 @@ public class ApiService: NSObject {
         }
     }
     
+    func logout(){
+        do {
+            try Constant.keychain.remove("user")
+            try Constant.keychain.remove("token")
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let swipingController = TrailerPageViewController(collectionViewLayout: layout)
+            
+            UIApplication.shared.keyWindow?.rootViewController = swipingController
+            
+        } catch let error {
+            print("error: \(error)")
+        }
+    }
+    
     func loginUser(with params: [String: String], completion: @escaping (Bool, String) -> ()){
         let urlString = Constant.BASE_URL + Constant.LOGIN
         let url = URL(string: urlString)!
@@ -110,8 +125,6 @@ public class ApiService: NSObject {
                     return
                 }
                 print(userData.dictionaryRepresentation())
-                UserDefaults.standard.set(token, forKey: "token")
-                UserDefaults.standard.synchronize()
                 ApiService.shared.rememberUser(user: userData)
                 completion(true, "success")
         }

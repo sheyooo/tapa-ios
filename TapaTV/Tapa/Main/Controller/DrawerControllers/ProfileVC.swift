@@ -13,7 +13,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Profile"
+        label.text = "PROFILE"
         label.textColor = .white
         let titleSize = Constant.isCompact(view: view, yes: 18, no: 20)
         label.font = UIFont(name: "Avenir", size: CGFloat(titleSize))
@@ -37,12 +37,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         
+        navigationItem.title = "PROFILE"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        
         ApiService.shared.loadRememberedUser()
         
-        self.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_fill_icon").withRenderingMode(.alwaysOriginal)
-        self.tabBarItem.image = #imageLiteral(resourceName: "profile_line_icon").withRenderingMode(.alwaysOriginal)
-        
-        view.addSubview(titleLabel)
         view.addSubview(tableView)
         
         tableView.delegate = self
@@ -57,45 +56,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let titleSize: CGFloat = Constant.isCompact(view: view, yes: 45, no: 65)
-        titleLabel.topAnchor.align(to: view.topAnchor, offset: 35)
-        titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
-        titleLabel.heightAnchor.equal(to: titleSize)
-        titleLabel.widthAnchor.equal(to: 150)
-//        let orientation = UIDevice.current.orientation
-//        if orientation == .landscapeLeft || orientation == .landscapeRight {
-//            tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-//            tableView.widthAnchor.equal(to: view.frame.width * 0.75)
-//            tableView.bottomAnchor.align(to: view.bottomAnchor)
-//            tableView.centerXAnchor.align(to: view.centerXAnchor)
-//            loadViewIfNeeded()
-//
-//        } else if UIDevice.current.orientation == .portrait || orientation == .portraitUpsideDown && !AppDelegate.isiPad(){
-//            tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-//            tableView.leftAnchor.align(to: view.leftAnchor)
-//            tableView.rightAnchor.align(to: view.rightAnchor)
-//            tableView.bottomAnchor.align(to: view.bottomAnchor)
-//            loadViewIfNeeded()
-//        } else if UIDevice.current.orientation ==
-//            UIDeviceOrientation.portraitUpsideDown && !AppDelegate.isiPad(){
-//            tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-//            tableView.leftAnchor.align(to: view.leftAnchor)
-//            tableView.rightAnchor.align(to: view.rightAnchor)
-//            tableView.bottomAnchor.align(to: view.bottomAnchor)
-//            loadViewIfNeeded()
-//        }
         
-        if AppDelegate.isiPad() {
-            tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-            tableView.widthAnchor.equal(to: view.frame.width * 0.75)
-            tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
-            tableView.centerXAnchor.align(to: view.centerXAnchor)
-        }else{
-            tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 15)
-            tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
-            tableView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
-            tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
-        }
+        tableView.topAnchor.align(to: view.layoutMarginsGuide.topAnchor)
+        tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
+        tableView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
+        tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
     }
     
     override func viewWillAppear(_ animated: Bool) {

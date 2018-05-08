@@ -28,7 +28,7 @@
 		946A2F7A205C0A4A003014D3 /* TrailerPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */; };
 		946A2F7E205C20DB003014D3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F7D205C20DB003014D3 /* MainTabViewController.swift */; };
 		946A2F82205C21A3003014D3 /* MoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F81205C21A3003014D3 /* MoviesVC.swift */; };
-		946A2F84205C21DF003014D3 /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F83205C21DF003014D3 /* TVViewController.swift */; };
+		946A2F84205C21DF003014D3 /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F83205C21DF003014D3 /* SportVC.swift */; };
 		946A2F86205C21FF003014D3 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F85205C21FF003014D3 /* ProfileVC.swift */; };
 		946A2F89205C2240003014D3 /* MoviesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F88205C2240003014D3 /* MoviesHeaderView.swift */; };
 		946A2F8B205C2281003014D3 /* NowMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F8A205C2281003014D3 /* NowMovieCell.swift */; };
@@ -41,6 +41,13 @@
 		946A2F99205C23EC003014D3 /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F98205C23EC003014D3 /* MovieListVC.swift */; };
 		948B3C8520679244009479B3 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B3C8420679244009479B3 /* ApiService.swift */; };
 		948B3C882067966E009479B3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B3C872067966E009479B3 /* User.swift */; };
+		94C6E31420A10FD500E22C87 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31320A10FD500E22C87 /* SliderView.swift */; };
+		94C6E31A20A13DB800E22C87 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31920A13DB800E22C87 /* UISideMenuNavigationController.swift */; };
+		94C6E31C20A13DCF00E22C87 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31B20A13DCF00E22C87 /* SideMenuManager.swift */; };
+		94C6E31E20A13DE800E22C87 /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31D20A13DE800E22C87 /* SideMenuTransition.swift */; };
+		94C6E32020A1404700E22C87 /* SlideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31F20A1404700E22C87 /* SlideVC.swift */; };
+		94C6E32320A1C66100E22C87 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E32220A1C66100E22C87 /* SettingsVC.swift */; };
+		94C6E32B20A1D25500E22C87 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E32A20A1D25500E22C87 /* Popover.swift */; };
 		94F2C64D206C540100BD3507 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F2C64C206C540100BD3507 /* SignupVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +75,7 @@
 		946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPageControl.swift; sourceTree = "<group>"; };
 		946A2F7D205C20DB003014D3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		946A2F81205C21A3003014D3 /* MoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesVC.swift; sourceTree = "<group>"; };
-		946A2F83205C21DF003014D3 /* TVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewController.swift; sourceTree = "<group>"; };
+		946A2F83205C21DF003014D3 /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
 		946A2F85205C21FF003014D3 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		946A2F88205C2240003014D3 /* MoviesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesHeaderView.swift; sourceTree = "<group>"; };
 		946A2F8A205C2281003014D3 /* NowMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowMovieCell.swift; sourceTree = "<group>"; };
@@ -81,6 +88,13 @@
 		946A2F98205C23EC003014D3 /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
 		948B3C8420679244009479B3 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		948B3C872067966E009479B3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		94C6E31320A10FD500E22C87 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		94C6E31920A13DB800E22C87 /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISideMenuNavigationController.swift; sourceTree = "<group>"; };
+		94C6E31B20A13DCF00E22C87 /* SideMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuManager.swift; sourceTree = "<group>"; };
+		94C6E31D20A13DE800E22C87 /* SideMenuTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
+		94C6E31F20A1404700E22C87 /* SlideVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideVC.swift; sourceTree = "<group>"; };
+		94C6E32220A1C66100E22C87 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		94C6E32A20A1D25500E22C87 /* Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
 		94F2C64C206C540100BD3507 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		B9E1B33C1C4D16AB1FC18DC8 /* Pods_TapaTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TapaTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AAE6542FCF3F454E331ACB /* Pods-TapaTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapaTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TapaTV/Pods-TapaTV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,11 +156,14 @@
 		946A2F62205A138C003014D3 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				94C6E31820A13D9600E22C87 /* SlideMenuNavigationController */,
 				946A2F63205A139C003014D3 /* IPlayerView.swift */,
 				946A2F75205C0A0B003014D3 /* GradientView.swift */,
 				946A2F77205C0A2B003014D3 /* GradientButton.swift */,
 				946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */,
 				943D07D3205E80D4008AB4D5 /* ShadowImageView.swift */,
+				94C6E31320A10FD500E22C87 /* SliderView.swift */,
+				94C6E32A20A1D25500E22C87 /* Popover.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -216,11 +233,11 @@
 		946A2F80205C218E003014D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				94C6E32120A1C62900E22C87 /* DrawerControllers */,
 				946A2F7D205C20DB003014D3 /* MainTabViewController.swift */,
 				946A2F50205A0A76003014D3 /* StreamTvVC.swift */,
 				946A2F81205C21A3003014D3 /* MoviesVC.swift */,
-				946A2F83205C21DF003014D3 /* TVViewController.swift */,
-				946A2F85205C21FF003014D3 /* ProfileVC.swift */,
+				946A2F83205C21DF003014D3 /* SportVC.swift */,
 				946A2F96205C2358003014D3 /* LoginVC.swift */,
 				946A2F98205C23EC003014D3 /* MovieListVC.swift */,
 				94F2C64C206C540100BD3507 /* SignupVC.swift */,
@@ -260,6 +277,26 @@
 				94234F812079737700076BC0 /* Movie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		94C6E31820A13D9600E22C87 /* SlideMenuNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				94C6E31920A13DB800E22C87 /* UISideMenuNavigationController.swift */,
+				94C6E31B20A13DCF00E22C87 /* SideMenuManager.swift */,
+				94C6E31D20A13DE800E22C87 /* SideMenuTransition.swift */,
+			);
+			path = SlideMenuNavigationController;
+			sourceTree = "<group>";
+		};
+		94C6E32120A1C62900E22C87 /* DrawerControllers */ = {
+			isa = PBXGroup;
+			children = (
+				946A2F85205C21FF003014D3 /* ProfileVC.swift */,
+				94C6E31F20A1404700E22C87 /* SlideVC.swift */,
+				94C6E32220A1C66100E22C87 /* SettingsVC.swift */,
+			);
+			path = DrawerControllers;
 			sourceTree = "<group>";
 		};
 		D3404BD35AB885A3821CBEDE /* Pods */ = {
@@ -429,9 +466,13 @@
 				946A2F61205A0CEC003014D3 /* Extension.swift in Sources */,
 				946A2F8B205C2281003014D3 /* NowMovieCell.swift in Sources */,
 				943D07D4205E80D4008AB4D5 /* ShadowImageView.swift in Sources */,
-				946A2F84205C21DF003014D3 /* TVViewController.swift in Sources */,
+				946A2F84205C21DF003014D3 /* SportVC.swift in Sources */,
+				94C6E31C20A13DCF00E22C87 /* SideMenuManager.swift in Sources */,
+				94C6E32020A1404700E22C87 /* SlideVC.swift in Sources */,
 				948B3C882067966E009479B3 /* User.swift in Sources */,
 				946A2F86205C21FF003014D3 /* ProfileVC.swift in Sources */,
+				94C6E31E20A13DE800E22C87 /* SideMenuTransition.swift in Sources */,
+				94C6E32B20A1D25500E22C87 /* Popover.swift in Sources */,
 				946A2F64205A139C003014D3 /* IPlayerView.swift in Sources */,
 				94F2C64D206C540100BD3507 /* SignupVC.swift in Sources */,
 				943159C72079861D005CEF3C /* MovieVC.swift in Sources */,
@@ -440,6 +481,8 @@
 				943159C9207987A2005CEF3C /* MovieHeaderView.swift in Sources */,
 				946A2F6D205C0922003014D3 /* TrailerPageViewController.swift in Sources */,
 				943159D7207AC540005CEF3C /* MovieDetailsVC.swift in Sources */,
+				94C6E31420A10FD500E22C87 /* SliderView.swift in Sources */,
+				94C6E32320A1C66100E22C87 /* SettingsVC.swift in Sources */,
 				946A2F89205C2240003014D3 /* MoviesHeaderView.swift in Sources */,
 				946A2F91205C22DA003014D3 /* PopularTVCell.swift in Sources */,
 				943062E4205E612900D95CDB /* Constant.swift in Sources */,
@@ -447,6 +490,7 @@
 				946A2F82205C21A3003014D3 /* MoviesVC.swift in Sources */,
 				946A2F51205A0A76003014D3 /* StreamTvVC.swift in Sources */,
 				946A2F93205C22FD003014D3 /* NowCell.swift in Sources */,
+				94C6E31A20A13DB800E22C87 /* UISideMenuNavigationController.swift in Sources */,
 				946A2F7E205C20DB003014D3 /* MainTabViewController.swift in Sources */,
 				946A2F7A205C0A4A003014D3 /* TrailerPageControl.swift in Sources */,
 				946A2F8F205C22B6003014D3 /* TVHeaderView.swift in Sources */,

@@ -60,6 +60,7 @@ class LoginVC: ValidatorViewController {
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir", size: 16)
+        button.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -198,8 +199,9 @@ class LoginVC: ValidatorViewController {
         view.backgroundColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
         [coverImageView, coverView].forEach {view.addSubview($0)}
         coverView.addSubview(mainView)
+        coverView.addSubview(skipButton)
         [logoImageView, logoTitleLabel, emailPhoneTextField,
-         emailLineView, passwordTextField, passwordLineView, forgotPassword, emailErrorLabel, passwordErrorLabel, skipButton, signInButton, dontHaveAccount].forEach{mainView.addSubview($0)}
+         emailLineView, passwordTextField, passwordLineView, forgotPassword, emailErrorLabel, passwordErrorLabel, signInButton, dontHaveAccount].forEach{mainView.addSubview($0)}
         
         let buttonTitleStr = NSMutableAttributedString(string:"New User? Create Account", attributes:attrs)
         attributedString.append(buttonTitleStr)
@@ -210,7 +212,7 @@ class LoginVC: ValidatorViewController {
         self.addValidatorEmail(toControl: self.emailPhoneTextField, errorPlaceholder: emailErrorLabel, errorMessage: "Email is invalid")
         self.addValidatorMinLength(toControl: passwordTextField, errorPlaceholder: passwordErrorLabel, errorMessage: "Enter at least %d characters", minLength: 6)
         
-        skipButton.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+        
         signInButton.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         dontHaveAccount.addTarget(self, action: #selector(pushToSignUp), for: .touchUpInside)
         
@@ -233,7 +235,7 @@ class LoginVC: ValidatorViewController {
                     if completed {
                         KVNProgress.showSuccess(withStatus: message, completion: {
                             Constant.keychain["password"] = password
-                            self.handleSkip(button: UIButton())
+                            self.handleSkip()
                         })
                     }else{
                         KVNProgress.showError(withStatus: message)
@@ -243,7 +245,7 @@ class LoginVC: ValidatorViewController {
         }
     }
     
-    @objc fileprivate func handleSkip(button: UIButton){
+    @objc fileprivate func handleSkip(){
         UIApplication.shared.keyWindow?.rootViewController = MainTabViewController()
     }
     
@@ -271,6 +273,11 @@ class LoginVC: ValidatorViewController {
         
         coverImageView.fill(view)
         coverView.fill(view)
+        
+        skipButton.topAnchor.align(to: coverView.topAnchor, offset: 30)
+        skipButton.rightAnchor.align(to: coverView.rightAnchor, offset: -10)
+        skipButton.widthAnchor.equal(to: 60)
+        skipButton.heightAnchor.equal(to: 45)
         
         mainView.heightAnchor.equal(to: view.frame.height * 0.7)
         mainView.widthAnchor.equal(to: view.frame.width * 0.9)
@@ -342,10 +349,6 @@ class LoginVC: ValidatorViewController {
 //        facebookButton.rightAnchor.align(to: coverView.rightAnchor, offset: -20)
 //        facebookButton.heightAnchor.equal(to: 45)
         
-        skipButton.topAnchor.align(to: coverView.topAnchor, offset: 30)
-        skipButton.rightAnchor.align(to: coverView.rightAnchor, offset: -10)
-        skipButton.widthAnchor.equal(to: 60)
-        skipButton.heightAnchor.equal(to: 45)
     }
 }
 

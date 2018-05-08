@@ -31,26 +31,26 @@ class MainTabViewController: UITabBarController {
         setupBarItems()
         let tabBarItemApperance = UITabBarItem.appearance()
         tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: UIColor.gray], for: .normal)
-        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: UIColor.white], for: .selected)
+        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 1)], for: .selected)
     }
     
     private func setupBarItems(){
         let controller1 = MovieVC()
-        controller1.tabBarItem = UITabBarItem(title: "MOVIES", image: #imageLiteral(resourceName: "movie_fill_icon"), tag: 1)
+        controller1.tabBarItem = UITabBarItem(title: "MOVIES", image: #imageLiteral(resourceName: "movie_icon"), tag: 1)
         let nav1 = UINavigationController(rootViewController: controller1)
         nav1.toolbar.isHidden = true
         
-//        let controller2 = TVViewController()
-//        controller2.tabBarItem = UITabBarItem(title: "TV", image: #imageLiteral(resourceName: "tv_line_icon"), tag: 2)
-//        let nav2 = UINavigationController(rootViewController: controller2)
+        let controller2 = SportVC()
+        controller2.tabBarItem = UITabBarItem(title: "SPORT", image: #imageLiteral(resourceName: "sport"), tag: 2)
+        let nav2 = UINavigationController(rootViewController: controller2)
         
-        let controller3 = ProfileVC()
-        controller3.tabBarItem = UITabBarItem(title: "PROFILE", image: #imageLiteral(resourceName: "profile_line_icon"), tag: 3)
+//        let controller3 = ProfileVC()
+//        controller3.tabBarItem = UITabBarItem(title: "PROFILE", image: #imageLiteral(resourceName: "profile"), tag: 3)
+//
+//        let nav3 = UINavigationController(rootViewController: controller3)
+//        nav3.title = ""
         
-        let nav3 = UINavigationController(rootViewController: controller3)
-        nav3.title = ""
-        
-        viewControllers = [nav1, nav3]
+        viewControllers = [nav1, nav2]
         
     }
 }

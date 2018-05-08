@@ -12,14 +12,6 @@ class MoviesVC: UIViewController {
     
     var movies = [Movie]()
     
-    fileprivate lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "search_icon").maskWithColor(color: .white), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "MOVIES"
@@ -37,6 +29,14 @@ class MoviesVC: UIViewController {
         return tv
     }()
     
+    @objc private func handleMenuToggle(){
+        let vc = SlideVC()
+        let navVC = UISideMenuNavigationController(rootViewController: vc)
+        navVC.leftSide = true
+        present(navVC, animated: true, completion: nil)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
@@ -44,7 +44,16 @@ class MoviesVC: UIViewController {
         self.tabBarItem.selectedImage = #imageLiteral(resourceName: "movie_fill_icon").withRenderingMode(.alwaysOriginal)
         self.tabBarItem.image = #imageLiteral(resourceName: "movie_line_icon").withRenderingMode(.alwaysOriginal)
         
-        [titleLabel, searchButton, tableView].forEach {view.addSubview($0)}
+        
+        let menuBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Menu"), style: .plain, target: self, action: #selector(handleMenuToggle))
+        menuBarButton.tintColor = .white
+        navigationItem.leftBarButtonItem = menuBarButton
+        
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
+        searchButton.tintColor = .white
+        navigationItem.rightBarButtonItem = menuBarButton
+        
+        [titleLabel, tableView].forEach {view.addSubview($0)}
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -68,15 +77,11 @@ class MoviesVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let size: CGFloat = (self.view.traitCollection.horizontalSizeClass == .compact) ? 45 : 65
-        titleLabel.topAnchor.align(to: view.topAnchor, offset: 35)
+        
+        titleLabel.topAnchor.align(to: view.topAnchor, offset: 15)
         titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
         titleLabel.heightAnchor.equal(to: size)
         titleLabel.widthAnchor.equal(to: 150)
-        
-        searchButton.topAnchor.align(to: view.topAnchor, offset: 20)
-        searchButton.rightAnchor.align(to: view.rightAnchor, offset: -10)
-        searchButton.heightAnchor.equal(to: size)
-        searchButton.widthAnchor.equal(to: size)
         
         tableView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 10)
         tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
