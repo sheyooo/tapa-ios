@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 let primaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
+let darkPrimaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.1699490017, alpha: 1)
 
 protocol MaterialView {
     func elevate(elevation: Double, shadowColor: UIColor, cornerRadius: CGFloat?)

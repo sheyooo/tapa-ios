@@ -46,7 +46,7 @@ class MovieVC: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MOVIES >"
+        label.text = "MOVIES"
         label.textColor = .white
         let titleSize = Constant.isCompact(view: view, yes: 18, no: 20)
         label.font = UIFont(name: "Avenir", size: CGFloat(titleSize))
@@ -89,9 +89,11 @@ class MovieVC: UIViewController {
         popOverTableView.delegate = self
         popOverTableView.dataSource = self
         popOverTableView.isScrollEnabled = false
-        popOverTableView.separatorColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        popOverTableView.separatorColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.4992508562)
+        popOverTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         popover = Popover(options: popoverOptions)
         popover.popoverColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
+        popover.cornerRadius = 10
         DispatchQueue.main.async {
             self.popOverTableView.sizeToFit()
             self.popover.show(self.popOverTableView, fromView: self.filterButton)

@@ -27,7 +27,6 @@
 		946A2F78205C0A2B003014D3 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F77205C0A2B003014D3 /* GradientButton.swift */; };
 		946A2F7A205C0A4A003014D3 /* TrailerPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */; };
 		946A2F7E205C20DB003014D3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F7D205C20DB003014D3 /* MainTabViewController.swift */; };
-		946A2F82205C21A3003014D3 /* MoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F81205C21A3003014D3 /* MoviesVC.swift */; };
 		946A2F84205C21DF003014D3 /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F83205C21DF003014D3 /* SportVC.swift */; };
 		946A2F86205C21FF003014D3 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F85205C21FF003014D3 /* ProfileVC.swift */; };
 		946A2F89205C2240003014D3 /* MoviesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F88205C2240003014D3 /* MoviesHeaderView.swift */; };
@@ -74,7 +73,6 @@
 		946A2F77205C0A2B003014D3 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPageControl.swift; sourceTree = "<group>"; };
 		946A2F7D205C20DB003014D3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
-		946A2F81205C21A3003014D3 /* MoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesVC.swift; sourceTree = "<group>"; };
 		946A2F83205C21DF003014D3 /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
 		946A2F85205C21FF003014D3 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		946A2F88205C2240003014D3 /* MoviesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesHeaderView.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				94C6E32120A1C62900E22C87 /* DrawerControllers */,
 				946A2F7D205C20DB003014D3 /* MainTabViewController.swift */,
 				946A2F50205A0A76003014D3 /* StreamTvVC.swift */,
-				946A2F81205C21A3003014D3 /* MoviesVC.swift */,
 				946A2F83205C21DF003014D3 /* SportVC.swift */,
 				946A2F96205C2358003014D3 /* LoginVC.swift */,
 				946A2F98205C23EC003014D3 /* MovieListVC.swift */,
@@ -487,7 +484,6 @@
 				946A2F91205C22DA003014D3 /* PopularTVCell.swift in Sources */,
 				943062E4205E612900D95CDB /* Constant.swift in Sources */,
 				946A2F78205C0A2B003014D3 /* GradientButton.swift in Sources */,
-				946A2F82205C21A3003014D3 /* MoviesVC.swift in Sources */,
 				946A2F51205A0A76003014D3 /* StreamTvVC.swift in Sources */,
 				946A2F93205C22FD003014D3 /* NowCell.swift in Sources */,
 				94C6E31A20A13DB800E22C87 /* UISideMenuNavigationController.swift in Sources */,
