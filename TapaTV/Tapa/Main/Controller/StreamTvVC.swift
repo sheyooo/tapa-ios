@@ -34,6 +34,10 @@ class StreamTvVC: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     
     private func shouldAutorotate() -> Bool {
         return false

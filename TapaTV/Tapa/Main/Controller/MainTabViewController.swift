@@ -15,6 +15,10 @@ class MainTabViewController: UITabBarController {
         configure()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLayoutSubviews() {
 //        var tabFrame = self.tabBar.frame
 //        tabFrame.size.height = Constant.isCompact(view: view, yes: 50, no: 60)

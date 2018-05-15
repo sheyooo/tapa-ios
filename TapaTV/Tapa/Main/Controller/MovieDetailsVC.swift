@@ -65,6 +65,10 @@ class MovieDetailsVC: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 extension MovieDetailsVC:  UITableViewDelegate, UITableViewDataSource {

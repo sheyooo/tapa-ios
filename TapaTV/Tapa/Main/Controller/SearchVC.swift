@@ -57,6 +57,10 @@ class SearchVC: UIViewController {
         tableView.rightAnchor.align(to: view.rightAnchor, offset: -20)
         tableView.bottomAnchor.align(to: view.bottomAnchor, offset: -60)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 extension SearchVC: UITableViewDataSource, UITableViewDelegate {

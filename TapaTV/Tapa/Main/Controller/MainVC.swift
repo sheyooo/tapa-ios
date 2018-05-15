@@ -140,6 +140,10 @@ class MainVC: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         //navigationItem.title = "MOVIES"
@@ -157,6 +161,7 @@ class MainVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         fetchMovies()
+        
         
     }
     

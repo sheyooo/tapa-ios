@@ -194,6 +194,10 @@ class LoginVC: ValidatorViewController {
     
     var attributedString = NSMutableAttributedString(string:"")
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
