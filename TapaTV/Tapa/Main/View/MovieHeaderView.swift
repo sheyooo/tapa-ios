@@ -10,24 +10,37 @@ import Foundation
 import UIKit
 import FCCarouselView
 
+protocol HeaderViewDelegate {
+    func didSelectHeaderViewCell(movie: Movie)
+}
+
 class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
+    var delegate: HeaderViewDelegate?
     
     var movies = [Movie]()
-    
+    var images = [String]()
+    var type = "movies"
     private func fetchMovies() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            ApiService.shared.fetchMovieList { (movies, message) in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            ApiService.shared.fetchContentList(type: self.type) { (movies, message) in
                 if movies == nil {
+                    self.collectionView.isHidden = true
+                    self.playButton.isHidden = true
                     return
                 }
-                
+                self.collectionView.isHidden = false
+                self.playButton.isHidden = false
                 guard let movies = movies else {return}
                 self.movies = movies
-                let images = movies.map({ (movie) -> String in
+                self.images = movies.map({ (movie) -> String in
                     return movie.posterImageUrl
                 })
-                self.collectionView.dataSource = images
+                self.collectionView.delegate = self
+                self.collectionView.dataSource = self.images
+                self.collectionView.registerClass(ImageCell.self, forCellWithReuseIdentifier: "cell")
+                let scroll = movies.count > 0 ? false : true
+                self.collectionView.autoScrollOptions = [.enable(scroll)]
             }
         }
     }
@@ -35,9 +48,9 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
     private lazy var collectionView: CarouselView = {
         let collectionView = CarouselView()
+        collectionView.isHidden = true
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
-        collectionView.autoScrollOptions = [.enable(true)]
         collectionView.pageControlOptions = [.hidden(false), .currentIndicatorTintColor(UIColor.white), .indicatorTintColor(primaryColor)]
         collectionView.registerClass(ImageCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5), cornerRadius: 10)
@@ -45,11 +58,13 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
         return collectionView
     }()
     
-    fileprivate lazy var playButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "pc_play"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    fileprivate lazy var playButton: UIImageView = {
+        let iv = UIImageView()
+        iv.isHidden = true
+        iv.image = #imageLiteral(resourceName: "pc_play")
+        iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
     }()
     
     override init(frame: CGRect) {
@@ -67,7 +82,8 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupViews()
+        backgroundColor = .clear
+        self.setupViews()
     }
     
     
@@ -87,10 +103,13 @@ extension MovieHeaderView: CarouselViewDelegate{
     
     func carouselView(_ view: CarouselView, cellAtIndexPath indexPath: IndexPath, pageIndex: Int) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndex: pageIndex) as! ImageCell
-        if let image = collectionView.dataSource[pageIndex] as? UIImage {
-            cell.imageView.image = image
-        }
+        cell.movie = movies[pageIndex]
         return cell
+    }
+    
+    func carouselView(_ view: CarouselView, didSelectItemAtIndex index: NSInteger) {
+        let movie = movies[index]
+        self.delegate?.didSelectHeaderViewCell(movie: movie)
     }
     
 }

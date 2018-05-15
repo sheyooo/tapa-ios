@@ -1,5 +1,5 @@
 //
-//  MovieVC.swift
+//  MainVC.swift
 //  TapaTV
 //
 //  Created by SimpuMind on 4/8/18.
@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import TBEmptyDataSet
 
-class MovieVC: UIViewController {
+
+class MainVC: UIViewController {
     
     var movies = [Movie]()
-    
-    var pages = [#imageLiteral(resourceName: "jumani"), #imageLiteral(resourceName: "lastjedi"), #imageLiteral(resourceName: "ohnoviginsa"), #imageLiteral(resourceName: "pirates"), #imageLiteral(resourceName: "spiderman"), #imageLiteral(resourceName: "starwars"), #imageLiteral(resourceName: "titanic"), #imageLiteral(resourceName: "jumani"), #imageLiteral(resourceName: "lastjedi"), #imageLiteral(resourceName: "ohnoviginsa"), #imageLiteral(resourceName: "pirates"), #imageLiteral(resourceName: "spiderman"), #imageLiteral(resourceName: "starwars"), #imageLiteral(resourceName: "titanic"), #imageLiteral(resourceName: "jumani"), #imageLiteral(resourceName: "lastjedi"), #imageLiteral(resourceName: "ohnoviginsa"), #imageLiteral(resourceName: "pirates"), #imageLiteral(resourceName: "spiderman"), #imageLiteral(resourceName: "starwars"), #imageLiteral(resourceName: "titanic")]
-    
+    var type = "movies"
     var popover: Popover!
     fileprivate var popoverOptions: [PopoverOption] = [
         .type(.down),
         .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
-    let popoverItems = ["Films", "Documentary", "Reality", "Random"]
+    var popoverItems = [String]()
     
     var popOverTableView: UITableView!
     
@@ -31,6 +31,7 @@ class MovieVC: UIViewController {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "search_icon").maskWithColor(color: .white), for: .normal)
         button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(handleSearchClick), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -46,7 +47,7 @@ class MovieVC: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MOVIES"
+        label.text = type.uppercased()
         label.textColor = .white
         let titleSize = Constant.isCompact(view: view, yes: 18, no: 20)
         label.font = UIFont(name: "Avenir", size: CGFloat(titleSize))
@@ -76,6 +77,14 @@ class MovieVC: UIViewController {
         return cv
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     @objc private func handleMenuToggle(){
         let vc = SlideVC()
         let navVC = UISideMenuNavigationController(rootViewController: vc)
@@ -83,11 +92,15 @@ class MovieVC: UIViewController {
         present(navVC, animated: true, completion: nil)
     }
     
-    @objc func handleMoreFilter(){
-        
+    @objc private func handleMoreFilter(){
+        if movies.count == 0 {
+            return
+        }
         popOverTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 135))
         popOverTableView.delegate = self
         popOverTableView.dataSource = self
+        popOverTableView.backgroundColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
+        popOverTableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
         popOverTableView.isScrollEnabled = false
         popOverTableView.separatorColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.4992508562)
         popOverTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -100,13 +113,28 @@ class MovieVC: UIViewController {
         }
     }
     
+    @objc private func handleSearchClick(){
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = ""
+        backButtonItem.tintColor = .white
+        navigationItem.backBarButtonItem = backButtonItem
+        let vc = SearchVC()
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
     private func fetchMovies() {
-        ApiService.shared.fetchMovieList { (movies, message) in
-            if movies == nil {
+        activityIndicator.startAnimating()
+        ApiService.shared.fetchContentList(type: type) { (contents, message) in
+            self.collectionView.emptyDataSetDataSource = self
+            self.collectionView.emptyDataSetDelegate = self
+            self.activityIndicator.stopAnimating()
+            self.setupCollectionView()
+            if contents == nil {
+                self.collectionView.reloadData()
                 return
             }
-            
-            guard let movies = movies else {return}
+            self.popoverItems = (self.type == "sports") ? ["Soccer", "Other Sports"] : ["Films", "Documentary", "Reality", "Random"]
+            guard let movies = contents else {return}
             self.movies = movies
             self.collectionView.reloadData()
         }
@@ -114,20 +142,30 @@ class MovieVC: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
-        
         //navigationItem.title = "MOVIES"
         
-        [menuButton, titleLabel, filterButton, searchButton, collectionView].forEach {view.addSubview($0)}
+        let searchBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "search_icon"), style: .plain, target: self, action: #selector(handleSearchClick))
+        searchBarButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = searchBarButton
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(NowCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.register(MovieHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView")
+        let menuBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Menu"), style: .plain, target: self, action: #selector(handleMenuToggle))
+        menuBarButton.tintColor = .white
+        self.navigationItem.leftBarButtonItem = menuBarButton
+        
+        [titleLabel, filterButton, collectionView, activityIndicator].forEach {view.addSubview($0)}
         
         NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         fetchMovies()
         
+    }
+    
+    private func setupCollectionView(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(NowCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(MovieHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView")
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,23 +198,14 @@ class MovieVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let size: CGFloat = (self.view.traitCollection.horizontalSizeClass == .compact) ? 45 : 65
-        menuButton.topAnchor.align(to: view.topAnchor, offset: 20)
-        menuButton.leftAnchor.align(to: view.leftAnchor, offset: 10)
-        menuButton.heightAnchor.equal(to: size)
-        menuButton.widthAnchor.equal(to: size)
+        let size: CGFloat =  Constant.isCompact(view: view, yes: 45, no: 65)
         
-        searchButton.topAnchor.align(to: view.topAnchor, offset: 20)
-        searchButton.rightAnchor.align(to: view.rightAnchor, offset: -10)
-        searchButton.heightAnchor.equal(to: size)
-        searchButton.widthAnchor.equal(to: size)
-        
-        titleLabel.topAnchor.align(to: menuButton.bottomAnchor, offset: 15)
+        titleLabel.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
         titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
         titleLabel.heightAnchor.equal(to: size)
         titleLabel.widthAnchor.equal(to: 150)
         
-        filterButton.topAnchor.align(to: searchButton.bottomAnchor, offset: 15)
+        filterButton.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
         filterButton.rightAnchor.align(to: view.rightAnchor, offset: -20)
         filterButton.heightAnchor.equal(to: size)
         filterButton.widthAnchor.equal(to: 80)
@@ -185,6 +214,11 @@ class MovieVC: UIViewController {
         collectionView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
         collectionView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
         collectionView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
+        
+        activityIndicator.centerYAnchor.align(to: view.centerYAnchor)
+        activityIndicator.centerXAnchor.align(to: view.centerXAnchor)
+        activityIndicator.widthAnchor.equal(to: 40)
+        activityIndicator.heightAnchor.equal(to: 40)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -215,7 +249,7 @@ class MovieVC: UIViewController {
     }
 }
 
-extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -249,7 +283,8 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         if (kind == UICollectionElementKindSectionHeader) {
             // Create Header
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView", for: indexPath) as! MovieHeaderView
-            
+            headerView.type = type
+            headerView.delegate = self
             reusableView = headerView
         }
         return reusableView!
@@ -283,18 +318,48 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
 }
 
-extension MovieVC: UITableViewDataSource, UITableViewDelegate {
+extension MainVC: HeaderViewDelegate {
+    func didSelectHeaderViewCell(movie: Movie) {
+        let vc = StreamTvVC()
+        vc.video = movie.video
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension MainVC: TBEmptyDataSetDelegate, TBEmptyDataSetDataSource {
+    
+    func imageForEmptyDataSet(in scrollView: UIScrollView) -> UIImage? {
+        return nil
+    }
+    
+    func titleForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "Something went wrong!", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18)])
+    }
+    
+    func descriptionForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: " Please check that you are connected to the internet.\n\n Tap to retry!", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)])
+    }
+    
+    func emptyDataSetTapEnabled(in scrollView: UIScrollView) -> Bool {
+        return true
+    }
+    func emptyDataSetDidTapEmptyView(in scrollView: UIScrollView) {
+        fetchMovies()
+    }
+}
+
+extension MainVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return popoverItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        //let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
         cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.text = popoverItems[indexPath.item]
         cell.textLabel?.textColor = .white
-        cell.backgroundColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
         return cell
     }
     
@@ -302,5 +367,39 @@ extension MovieVC: UITableViewDataSource, UITableViewDelegate {
         //let item = popoverItems[indexPath.item]
         
         self.popover.dismiss()
+    }
+}
+
+class CustomCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
+        selectionStyle = .gray
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.backgroundColor = #colorLiteral(red: 0.1367795458, green: 0.1363631674, blue: 0.184029981, alpha: 1)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.backgroundColor = .clear
+        super.touchesBegan(touches, with: event)
+    }
+    
+    
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
+        selectedBackgroundView = view
     }
 }

@@ -22,6 +22,7 @@ PODS:
   - ScalingCarousel (2.0.3)
   - SnapKit (4.0.0)
   - Stripe (12.1.0)
+  - TBEmptyDataSet (2.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - Player (~> 0.8.0)
   - ScalingCarousel
   - Stripe
+  - TBEmptyDataSet
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -53,7 +55,8 @@ SPEC CHECKSUMS:
   ScalingCarousel: 023450cd1a8f1bd7d13a8edbddc956ded8ed1891
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Stripe: de8bffa8e6813f678d526c52f416fe224141fa09
+  TBEmptyDataSet: 7383c353092f33dc572084cfa9182678a132dac7
 
-PODFILE CHECKSUM: 34861e3a12a616230f1d557dc94f91e4c97d0fa5
+PODFILE CHECKSUM: 3fc30f475ca1677f23bbf884854724ebfa29a07c
 
 COCOAPODS: 1.3.1

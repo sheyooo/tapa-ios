@@ -15,6 +15,7 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private lazy var tableView: UITableView = {
        let tv = UITableView()
         tv.backgroundColor = .clear
+        tv.separatorColor = UIColor(white: 0.3, alpha: 0.5)
         tv.delegate = self
         tv.dataSource = self
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -32,6 +33,14 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         view.addSubview(tableView)
         
+        tableView.sizeToFit()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.async {
+            self.tableView.sizeToFit()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,6 +71,10 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.textColor = .white
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
 

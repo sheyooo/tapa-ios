@@ -130,9 +130,9 @@ public class ApiService: NSObject {
         }
     }
     
-    func fetchMovieList(completion: @escaping ([Movie]?, _ message: String) -> ()){
+    func fetchContentList(type: String, completion: @escaping ([Movie]?, _ message: String) -> ()){
         
-        let urlString = Constant.BASE_URL + "movies"
+        let urlString = Constant.BASE_URL + type
         let url = URL(string: urlString)!
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 40

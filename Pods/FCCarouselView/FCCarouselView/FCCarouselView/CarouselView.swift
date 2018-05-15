@@ -137,6 +137,7 @@ open class CarouselView: UIView {
         didSet {
             pageCount = dataSource.count
             pageControl.numberOfPages = pageCount
+            collectionView.reloadData()
         }
     }
     

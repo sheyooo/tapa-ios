@@ -17,7 +17,7 @@ class SlideVC: UITableViewController {
         view.backgroundColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)
         tableView.separatorStyle = .none
         self.automaticallyAdjustsScrollViewInsets = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +40,9 @@ class SlideVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
         cell.textLabel?.text = menuTitles[indexPath.item]
         cell.textLabel?.textColor = .white
-        cell.backgroundColor = .clear
         return cell
     }
     

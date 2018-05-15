@@ -20,4 +20,5 @@ target 'TapaTV' do
   pod 'Stripe'
   pod 'BMPlayer', '~> 1.0.0'
   pod 'NVActivityIndicatorView'
+  pod 'TBEmptyDataSet'
 end
