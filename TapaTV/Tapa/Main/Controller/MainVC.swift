@@ -198,6 +198,7 @@ class MainVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //AppUtility.lockOrientation(.all)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -275,11 +276,8 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = MovieDetailsVC()
         let movie = movies[indexPath.item]
-        vc.movie = movie
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true, completion: nil)
+        didSelectMovie(movie: movie)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -289,7 +287,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             // Create Header
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView", for: indexPath) as! MovieHeaderView
             headerView.type = type
-            headerView.delegate = self
+            headerView.headerDelegate = self
             reusableView = headerView
         }
         return reusableView!
@@ -324,10 +322,12 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
 }
 
 extension MainVC: HeaderViewDelegate {
-    func didSelectHeaderViewCell(movie: Movie) {
-        let vc = StreamTvVC()
-        vc.video = movie.video
-        navigationController?.pushViewController(vc, animated: true)
+    
+    func didSelectMovie(movie: Movie) {
+        let vc = MovieDetailsVC()
+        vc.movie = movie
+        let nav = NavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
     }
 }
 

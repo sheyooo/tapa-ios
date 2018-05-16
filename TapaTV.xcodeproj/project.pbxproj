@@ -37,6 +37,8 @@
 		946A2F95205C231E003014D3 /* SeeMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F94205C231E003014D3 /* SeeMoreCell.swift */; };
 		946A2F97205C2358003014D3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F96205C2358003014D3 /* LoginVC.swift */; };
 		946A2F99205C23EC003014D3 /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F98205C23EC003014D3 /* MovieListVC.swift */; };
+		94850F0A20AB74C400F33B38 /* TVVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0920AB74C400F33B38 /* TVVC.swift */; };
+		94850F0C20AB780500F33B38 /* MovieDetalsSectionOneCel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0B20AB780500F33B38 /* MovieDetalsSectionOneCel.swift */; };
 		948B3C8520679244009479B3 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B3C8420679244009479B3 /* ApiService.swift */; };
 		948B3C882067966E009479B3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948B3C872067966E009479B3 /* User.swift */; };
 		94C6E31420A10FD500E22C87 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31320A10FD500E22C87 /* SliderView.swift */; };
@@ -83,6 +85,8 @@
 		946A2F94205C231E003014D3 /* SeeMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCell.swift; sourceTree = "<group>"; };
 		946A2F96205C2358003014D3 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		946A2F98205C23EC003014D3 /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
+		94850F0920AB74C400F33B38 /* TVVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVVC.swift; sourceTree = "<group>"; };
+		94850F0B20AB780500F33B38 /* MovieDetalsSectionOneCel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetalsSectionOneCel.swift; sourceTree = "<group>"; };
 		948B3C8420679244009479B3 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		948B3C872067966E009479B3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		94C6E31320A10FD500E22C87 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 				94F2C64C206C540100BD3507 /* SignupVC.swift */,
 				943159C62079861D005CEF3C /* MainVC.swift */,
 				943159D6207AC540005CEF3C /* MovieDetailsVC.swift */,
+				94850F0920AB74C400F33B38 /* TVVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				946A2F94205C231E003014D3 /* SeeMoreCell.swift */,
 				943159C8207987A2005CEF3C /* MovieHeaderView.swift */,
 				94F69DCA20AB32BF009FBB7D /* ImageCell.swift */,
+				94850F0B20AB780500F33B38 /* MovieDetalsSectionOneCel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Player/Player.framework",
@@ -430,6 +437,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/TBEmptyDataSet/TBEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/ZFPlayer/ZFPlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -441,6 +449,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVNProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PasswordTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Player.framework",
@@ -448,6 +457,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TBEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFPlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -462,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946A2F97205C2358003014D3 /* LoginVC.swift in Sources */,
+				94850F0C20AB780500F33B38 /* MovieDetalsSectionOneCel.swift in Sources */,
 				946A2F61205A0CEC003014D3 /* Extension.swift in Sources */,
 				946A2F8B205C2281003014D3 /* NowMovieCell.swift in Sources */,
 				943D07D4205E80D4008AB4D5 /* ShadowImageView.swift in Sources */,
@@ -482,6 +493,7 @@
 				943159D7207AC540005CEF3C /* MovieDetailsVC.swift in Sources */,
 				94C6E31420A10FD500E22C87 /* SliderView.swift in Sources */,
 				94C6E32320A1C66100E22C87 /* SettingsVC.swift in Sources */,
+				94850F0A20AB74C400F33B38 /* TVVC.swift in Sources */,
 				946A2F91205C22DA003014D3 /* PopularTVCell.swift in Sources */,
 				943062E4205E612900D95CDB /* Constant.swift in Sources */,
 				946A2F78205C0A2B003014D3 /* GradientButton.swift in Sources */,

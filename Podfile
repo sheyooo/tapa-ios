@@ -21,4 +21,5 @@ target 'TapaTV' do
   pod 'BMPlayer', '~> 1.0.0'
   pod 'NVActivityIndicatorView'
   pod 'TBEmptyDataSet'
+  pod 'ZFPlayer'
 end

@@ -11,12 +11,12 @@ import UIKit
 import FCCarouselView
 
 protocol HeaderViewDelegate {
-    func didSelectHeaderViewCell(movie: Movie)
+    func didSelectMovie(movie: Movie)
 }
 
 class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
-    var delegate: HeaderViewDelegate?
+    var headerDelegate: HeaderViewDelegate?
     
     var movies = [Movie]()
     var images = [String]()
@@ -109,7 +109,7 @@ extension MovieHeaderView: CarouselViewDelegate{
     
     func carouselView(_ view: CarouselView, didSelectItemAtIndex index: NSInteger) {
         let movie = movies[index]
-        self.delegate?.didSelectHeaderViewCell(movie: movie)
+        self.headerDelegate?.didSelectMovie(movie: movie)
     }
     
 }

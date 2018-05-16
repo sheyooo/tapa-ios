@@ -26,28 +26,21 @@ class StreamTvVC: UIViewController {
     
     var player: BMPlayer!
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .landscape
-        } else {
-            return .all
-        }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    
-    private func shouldAutorotate() -> Bool {
-        return false
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        guard let video = video else{
+            handleDismiss()
+            return
+        }
         
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
+        let dismissBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "close"), style: .plain, target: self, action: #selector(handleDismiss))
+        dismissBarButton.tintColor = .white
+        
+        let titleBarButton = UIBarButtonItem(title: video.title, style: .plain, target: self, action: nil)
+        titleBarButton.tintColor = .white
+        navigationItem.leftBarButtonItems = [dismissBarButton, titleBarButton]
         
         setupPlayerManager()
         preparePlayer()
@@ -69,6 +62,10 @@ class StreamTvVC: UIViewController {
             }
             let _ = self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @objc private func handleDismiss(){
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func applicationWillEnterForeground() {
@@ -136,13 +133,12 @@ class StreamTvVC: UIViewController {
         BMPlayerConf.allowLog = false
         BMPlayerConf.shouldAutoPlay = true
         BMPlayerConf.tintColor = UIColor.white
-        BMPlayerConf.topBarShowInCase = .always
+        BMPlayerConf.topBarShowInCase = .none
         BMPlayerConf.loaderType  = NVActivityIndicatorType.ballRotateChase
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        AppUtility.lockOrientation(.all)
         UIApplication.shared.statusBarStyle = .default
         player.pause(allowAutoPlay: true)
     }
@@ -150,14 +146,19 @@ class StreamTvVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //AppUtility.lockOrientation(.all)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
         UIApplication.shared.statusBarStyle = .lightContent
         player.autoPlay()
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        AppUtility.lockOrientation(.landscape)
         // Or to rotate and lock
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         
