@@ -31,6 +31,14 @@ class MovieDetailsVC: UIViewController {
         return tv
     }()
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +48,28 @@ class MovieDetailsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MovieDetalsSectionOneCel.self, forCellReuseIdentifier: "sectionOne")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    @objc func deviceRotated(){
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            print("Landscape")
+            // Resize other things
+            let orientation = UIInterfaceOrientationMask.landscape
+            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+        }
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+            print("Portrait")
+            // Resize other things
+            let orientation = UIInterfaceOrientationMask.landscape
+            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+            
+        }
     }
     
     @objc private func closeModalView(){

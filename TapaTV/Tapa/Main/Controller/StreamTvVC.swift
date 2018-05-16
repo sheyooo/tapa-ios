@@ -256,8 +256,8 @@ class BMPlayerCustomControlView: BMPlayerControlView {
     
     override func updateUI(_ isForFullScreen: Bool) {
         super.updateUI(isForFullScreen)
-        playbackRateButton.isHidden = !isForFullScreen
-        rotateButton.isHidden = !isForFullScreen
+        //playbackRateButton.isHidden = !isForFullScreen
+        //rotateButton.isHidden = !isForFullScreen
         if let layer = player?.playerLayer {
             layer.frame = player!.bounds
         }

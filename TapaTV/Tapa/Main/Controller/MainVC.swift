@@ -144,6 +144,15 @@ class MainVC: UIViewController {
         return .lightContent
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         //navigationItem.title = "MOVIES"
@@ -207,12 +216,12 @@ class MainVC: UIViewController {
         let size: CGFloat =  Constant.isCompact(view: view, yes: 45, no: 65)
         
         titleLabel.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
-        titleLabel.leftAnchor.align(to: view.leftAnchor, offset: 20)
+        titleLabel.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor, offset: 20)
         titleLabel.heightAnchor.equal(to: size)
         titleLabel.widthAnchor.equal(to: 150)
         
         filterButton.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
-        filterButton.rightAnchor.align(to: view.rightAnchor, offset: -20)
+        filterButton.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor, offset: -20)
         filterButton.heightAnchor.equal(to: size)
         filterButton.widthAnchor.equal(to: 80)
         
@@ -297,8 +306,18 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        var width: CGFloat = 0
+        switch UIDevice.current.orientation {
+        case .portrait, .portraitUpsideDown:
+            width = view.layoutMarginsGuide.layoutFrame.width
+        case .landscapeLeft, .landscapeRight:
+            width = view.layoutMarginsGuide.layoutFrame.width
+        default:
+            width = view.layoutMarginsGuide.layoutFrame.width
+        }
+        
         let paddingSpace = sectionInsets.right * (itemsPerRow + 1)
-        let availableWidth = collectionView.frame.width - paddingSpace
+        let availableWidth = width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         
         return CGSize(width: widthPerItem - 10, height: widthPerItem + 90)
@@ -326,7 +345,7 @@ extension MainVC: HeaderViewDelegate {
     func didSelectMovie(movie: Movie) {
         let vc = MovieDetailsVC()
         vc.movie = movie
-        let nav = NavigationController(rootViewController: vc)
+        let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true, completion: nil)
     }
 }
