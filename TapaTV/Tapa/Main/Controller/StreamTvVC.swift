@@ -29,18 +29,6 @@ class StreamTvVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        guard let video = video else{
-            handleDismiss()
-            return
-        }
-        
-        let dismissBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "close"), style: .plain, target: self, action: #selector(handleDismiss))
-        dismissBarButton.tintColor = .white
-        
-        let titleBarButton = UIBarButtonItem(title: video.title, style: .plain, target: self, action: nil)
-        titleBarButton.tintColor = .white
-        navigationItem.leftBarButtonItems = [dismissBarButton, titleBarButton]
         
         setupPlayerManager()
         preparePlayer()
@@ -58,6 +46,7 @@ class StreamTvVC: UIViewController {
         
         player.backBlock = { [unowned self] (isFullScreen) in
             if isFullScreen == true {
+                self.handleDismiss()
                 return
             }
             let _ = self.navigationController?.popViewController(animated: true)
@@ -89,12 +78,14 @@ class StreamTvVC: UIViewController {
             make.top.equalTo(view.snp.top)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
-            make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
+            make.bottom.equalTo(view.safeArea.bottom)
+            //make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
         }
         
         player.delegate = self
         player.backBlock = { [unowned self] (isFullScreen) in
             if isFullScreen {
+                self.handleDismiss()
                 return
             } else {
                 let _ = self.navigationController?.popViewController(animated: true)
@@ -126,20 +117,20 @@ class StreamTvVC: UIViewController {
     // 设置播放器单例，修改属性
     func setupPlayerManager() {
         resetPlayerManager()
-        BMPlayerConf.topBarShowInCase = .none
+        BMPlayerConf.topBarShowInCase = .horizantalOnly
     }
     
     func resetPlayerManager() {
         BMPlayerConf.allowLog = false
         BMPlayerConf.shouldAutoPlay = true
         BMPlayerConf.tintColor = UIColor.white
-        BMPlayerConf.topBarShowInCase = .none
+        BMPlayerConf.topBarShowInCase = .horizantalOnly
         BMPlayerConf.loaderType  = NVActivityIndicatorType.ballRotateChase
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = .lightContent
         player.pause(allowAutoPlay: true)
     }
     
@@ -149,7 +140,7 @@ class StreamTvVC: UIViewController {
         
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        //AppUtility.lockOrientation(.all)
+
         navigationController?.navigationBar.shadowImage = UIImage()
         
         UIApplication.shared.statusBarStyle = .lightContent
@@ -177,13 +168,14 @@ class StreamTvVC: UIViewController {
 extension StreamTvVC: BMPlayerDelegate {
     // Call when player orinet changed
     func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
+        
         player.snp.remakeConstraints { (make) in
             make.top.equalTo(view.snp.top)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             if isFullscreen {
                 self.navigationController?.setNavigationBarHidden(true, animated: true)
-                make.bottom.equalTo(view.snp.bottom)
+                make.bottom.equalTo(view.safeArea.bottom)
             } else {
                 make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
             }

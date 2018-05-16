@@ -62,7 +62,7 @@ class TVVC: UIViewController {
             make.top.equalTo(self.view).offset(20)
             make.left.right.equalTo(self.view)
             // Here a 16:9 aspect ratio, can customize the video aspect ratio
-            make.height.equalTo(self.playerView.snp.width)
+            make.bottom.equalTo(view.snp.bottom)
         }
     }
 

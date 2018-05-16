@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 let primaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
 let darkPrimaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.1699490017, alpha: 1)
@@ -17,6 +18,18 @@ protocol MaterialView {
 }
 
 extension UIView {
+    
+    var safeArea: ConstraintBasicAttributesDSL {
+        
+        #if swift(>=3.2)
+        if #available(iOS 11.0, *){
+            return Constant.isIphoneX() ? self.safeAreaLayoutGuide.snp : self.snp
+        }
+        return self.snp
+        #else
+        return self.snp
+        #endif
+    }
     func center(in view: UIView) {
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true

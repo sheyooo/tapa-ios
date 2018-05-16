@@ -21,7 +21,7 @@ class IPlayerView: UIView {
     fileprivate var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
     fileprivate var muteBtn = UIButton(type: UIButtonType.custom)
     fileprivate var player = Player()
-    var delegate: IPlayerViewDelegate? = nil
+    //var delegate: IPlayerViewDelegate? = nil
     
     deinit {
         self.player.view.removeFromSuperview()
