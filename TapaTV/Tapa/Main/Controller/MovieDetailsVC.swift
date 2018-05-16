@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ZFPlayer
 
 class MovieDetailsVC: UIViewController {
     
@@ -31,15 +30,6 @@ class MovieDetailsVC: UIViewController {
         return tv
     }()
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
-        return orientation
-    }
-    
-    override var shouldAutorotate: Bool{
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
@@ -49,28 +39,12 @@ class MovieDetailsVC: UIViewController {
         tableView.dataSource = self
         tableView.register(MovieDetalsSectionOneCel.self, forCellReuseIdentifier: "sectionOne")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    @objc func deviceRotated(){
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
-            print("Landscape")
-            // Resize other things
-            let orientation = UIInterfaceOrientationMask.landscape
-            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
-        }
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
-            print("Portrait")
-            // Resize other things
-            let orientation = UIInterfaceOrientationMask.landscape
-            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
-            
-        }
-    }
     
     @objc private func closeModalView(){
         dismiss(animated: true, completion: nil)

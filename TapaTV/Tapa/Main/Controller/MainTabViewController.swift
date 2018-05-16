@@ -10,6 +10,15 @@ import UIKit
 
 class MainTabViewController: UITabBarController {
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -42,14 +51,15 @@ class MainTabViewController: UITabBarController {
         let controller1 = MainVC()
         controller1.tabBarItem = UITabBarItem(title: "MOVIES", image: #imageLiteral(resourceName: "movie_icon"), tag: 1)
         controller1.type = "movies"
-        let nav1 = UINavigationController(rootViewController: controller1)
+        let nav1 = NavigationController(rootViewController: controller1)
+        nav1.hidesBottomBarWhenPushed = true
         nav1.toolbar.isHidden = true
         
         let controller2 = MainVC()
         controller2.type = "sports"
         controller2.tabBarItem = UITabBarItem(title: "SPORT", image: #imageLiteral(resourceName: "sport"), tag: 2)
-        let nav2 = UINavigationController(rootViewController: controller2)
-        
+        let nav2 = NavigationController(rootViewController: controller2)
+        nav2.hidesBottomBarWhenPushed = true
 //        let controller3 = ProfileVC()
 //        controller3.tabBarItem = UITabBarItem(title: "PROFILE", image: #imageLiteral(resourceName: "profile"), tag: 3)
 //

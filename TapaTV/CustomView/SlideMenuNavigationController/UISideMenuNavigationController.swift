@@ -43,6 +43,15 @@ open class UISideMenuNavigationController: UINavigationController {
         }
     }
     
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override open var shouldAutorotate: Bool{
+        return true
+    }
+    
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         

@@ -24,6 +24,15 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return tv
     }()
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = primaryColor
@@ -42,6 +51,7 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        AppUtility.lockOrientation(.all)
         DispatchQueue.main.async {
             self.tableView.sizeToFit()
         }

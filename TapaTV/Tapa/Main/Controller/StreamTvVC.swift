@@ -26,6 +26,14 @@ class StreamTvVC: UIViewController {
     
     var player: BMPlayer!
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
+        return orientation
+    }
+    
+    override var shouldAutorotate: Bool{
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +62,8 @@ class StreamTvVC: UIViewController {
     }
     
     @objc private func handleDismiss(){
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @objc func applicationWillEnterForeground() {
@@ -78,7 +87,7 @@ class StreamTvVC: UIViewController {
             make.top.equalTo(view.snp.top)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.safeArea.bottom)
+            make.bottom.equalTo(view.snp.bottom)
             //make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
         }
         
@@ -175,7 +184,7 @@ extension StreamTvVC: BMPlayerDelegate {
             make.right.equalTo(view.snp.right)
             if isFullscreen {
                 self.navigationController?.setNavigationBarHidden(true, animated: true)
-                make.bottom.equalTo(view.safeArea.bottom)
+                make.bottom.equalTo(view.snp.bottom)
             } else {
                 make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
             }

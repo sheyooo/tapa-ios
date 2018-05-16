@@ -345,7 +345,7 @@ extension MainVC: HeaderViewDelegate {
     func didSelectMovie(movie: Movie) {
         let vc = MovieDetailsVC()
         vc.movie = movie
-        let nav = UINavigationController(rootViewController: vc)
+        let nav = NavigationController(rootViewController: vc)
         present(nav, animated: true, completion: nil)
     }
 }
