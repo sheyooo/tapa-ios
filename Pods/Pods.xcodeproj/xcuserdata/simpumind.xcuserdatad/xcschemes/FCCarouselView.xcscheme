@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AF08EA8FDF95DB9A8666820077D211E5'
-               BlueprintName = 'FCCarouselView'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FCCarouselView.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AF08EA8FDF95DB9A8666820077D211E5"
+               BlueprintName = "FCCarouselView"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "FCCarouselView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

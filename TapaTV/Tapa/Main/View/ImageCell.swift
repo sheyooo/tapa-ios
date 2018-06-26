@@ -72,8 +72,6 @@ class ImageCell: UICollectionViewCell {
         imageView.addSubview(titleLabel)
         imageView.addSubview(descriptionLabel)
         
-        
-        elevate(elevation: 5.0, shadowColor: #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), cornerRadius: 10)
         clipsToBounds = true
         backgroundColor = .clear
     }

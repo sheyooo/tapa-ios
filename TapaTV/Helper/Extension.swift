@@ -13,9 +13,7 @@ import SnapKit
 let primaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
 let darkPrimaryColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.1699490017, alpha: 1)
 
-protocol MaterialView {
-    func elevate(elevation: Double, shadowColor: UIColor, cornerRadius: CGFloat?)
-}
+
 
 extension UIView {
     
@@ -222,17 +220,6 @@ extension UIImage {
     
 }
 
-extension UIView: MaterialView {
-    func elevate(elevation: Double, shadowColor: UIColor, cornerRadius: CGFloat?) {
-        self.layer.masksToBounds = true
-        self.layer.shadowColor = shadowColor.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: elevation)
-        self.layer.shadowOpacity = 2.24
-        self.layer.cornerRadius = cornerRadius ?? 0
-        self.layer.shadowRadius = abs(CGFloat(elevation))
-    }
-}
-
 
 extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
@@ -296,6 +283,17 @@ extension NSMutableAttributedString {
         
         return self
     }
+}
+
+extension UIBarButtonItem {
+    
+    var view: UIView? {
+        guard let view = self.value(forKey: "view") as? UIView else {
+            return nil
+        }
+        return view
+    }
+    
 }
 
 class ButtonWithImage: UIButton {

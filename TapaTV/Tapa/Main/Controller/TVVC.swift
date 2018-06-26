@@ -42,10 +42,10 @@ class TVVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //isLandscape = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
+         AppDelegate.AppUtility.lockOrientation(.landscape, andRotateTo: .landscapeLeft)
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -53,7 +53,7 @@ class TVVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        isLandscape = false
+        AppDelegate.AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
     }
     
     private func setupPlayer(){
@@ -76,24 +76,4 @@ extension TVVC: ZFPlayerDelegate {
     func zf_playerBackAction() {
         navigationController?.popViewController(animated: true)
     }
-}
-
-class NavigationController: UINavigationController {
-    
-    var shouldLandscape = false
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if shouldLandscape {
-            let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.landscape]
-            return orientation
-        }else{
-            let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
-            return orientation
-        }
-    }
-    
-    override var shouldAutorotate: Bool{
-        return true
-    }
-    
 }

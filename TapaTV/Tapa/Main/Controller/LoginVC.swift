@@ -253,14 +253,6 @@ class LoginVC: ValidatorViewController {
         UIApplication.shared.keyWindow?.rootViewController = MainTabViewController()
     }
     
-    override var shouldAutorotate: Bool{
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isTranslucent = true

@@ -11,14 +11,6 @@ import UIKit
 class MovieDetailsVC: UIViewController {
     
     var movie: Movie?
-
-    private lazy var closeModal: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "multiply"), for: .normal)
-        button.addTarget(self, action: #selector(closeModalView), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     private lazy var tableView: UITableView = {
        let tv = UITableView()
@@ -33,16 +25,12 @@ class MovieDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
-        [closeModal, tableView].forEach{view.addSubview($0)}
+        [tableView].forEach{view.addSubview($0)}
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MovieDetalsSectionOneCel.self, forCellReuseIdentifier: "sectionOne")
         
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     
@@ -53,19 +41,16 @@ class MovieDetailsVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        closeModal.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 20)
-        closeModal.widthAnchor.equal(to: Constant.isCompact(view: self.view, yes: 24, no: 44))
-        closeModal.heightAnchor.equal(to: Constant.isCompact(view: self.view, yes: 24, no: 44))
-        closeModal.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor, offset: 10)
-        
-        tableView.topAnchor.align(to: closeModal.bottomAnchor, offset: 20)
+        tableView.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 20)
         tableView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor, offset: 10)
         tableView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor, offset: -10)
         tableView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor, offset: -10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -73,6 +58,15 @@ class MovieDetailsVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+}
+
+extension MovieDetailsVC: MovieDetailDelegate{
+    func didShowViewController(movie: Movie) {
+        let vc = StreamTvVC()
+        vc.video = movie.video
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -85,7 +79,7 @@ extension MovieDetailsVC:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionOne", for: indexPath) as! MovieDetalsSectionOneCel
         cell.movie = movie
-        cell.movieDetailsVC = self
+        cell.movieDetaildelegate = self
         cell.selectionStyle = .none
         return cell
             

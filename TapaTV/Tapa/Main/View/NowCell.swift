@@ -24,9 +24,15 @@ class NowCell: UICollectionViewCell {
         }
     }
     
-    lazy var titleLabel: UILabel = {
+    private lazy var containerView: CardView = {
+       let view = CardView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white//#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.textColor = .white
         label.numberOfLines = 3
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
@@ -35,7 +41,7 @@ class NowCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var videoThumbNail: UIImageView = {
+    private lazy var videoThumbNail: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.cornerRadius = 10
@@ -47,8 +53,8 @@ class NowCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(titleLabel)
-        addSubview(videoThumbNail)
-        elevate(elevation: 5.0, shadowColor: #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), cornerRadius: 10)
+        addSubview(containerView)
+        containerView.addSubview(videoThumbNail)
         clipsToBounds = true
         
         videoThumbNail.shadowColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
@@ -65,10 +71,11 @@ class NowCell: UICollectionViewCell {
         titleLabel.rightAnchor.align(to: rightAnchor, offset: -5)
         titleLabel.bottomAnchor.align(to: bottomAnchor, offset: -5)
         
-        videoThumbNail.topAnchor.align(to: topAnchor, offset: 20)
-        videoThumbNail.leftAnchor.align(to: leftAnchor)
-        videoThumbNail.rightAnchor.align(to: rightAnchor)
-        videoThumbNail.bottomAnchor.align(to: titleLabel.topAnchor)
+        containerView.topAnchor.align(to: topAnchor, offset: 20)
+        containerView.leftAnchor.align(to: leftAnchor)
+        containerView.rightAnchor.align(to: rightAnchor)
+        containerView.bottomAnchor.align(to: titleLabel.topAnchor)
+        videoThumbNail.fill(containerView)
     }
     
     required init?(coder aDecoder: NSCoder) {

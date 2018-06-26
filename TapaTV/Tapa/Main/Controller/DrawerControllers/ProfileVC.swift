@@ -32,14 +32,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return tableView
     }()
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
-        return orientation
-    }
-    
-    override var shouldAutorotate: Bool{
-        return true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

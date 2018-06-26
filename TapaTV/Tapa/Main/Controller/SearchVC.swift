@@ -37,8 +37,6 @@ class SearchVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
-        tableView.sectionHeaderHeight = 40
-        tableView.register(PopularTVCell.self, forCellReuseIdentifier: "popularTVCell")
         
     }
     

@@ -30,7 +30,7 @@ class StreamTvVC: UIViewController {
         let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
         return orientation
     }
-    
+
     override var shouldAutorotate: Bool{
         return true
     }
@@ -54,7 +54,7 @@ class StreamTvVC: UIViewController {
         
         player.backBlock = { [unowned self] (isFullScreen) in
             if isFullScreen == true {
-                self.handleDismiss()
+                let _ = self.navigationController?.popViewController(animated: true)
                 return
             }
             let _ = self.navigationController?.popViewController(animated: true)
@@ -94,7 +94,7 @@ class StreamTvVC: UIViewController {
         player.delegate = self
         player.backBlock = { [unowned self] (isFullScreen) in
             if isFullScreen {
-                self.handleDismiss()
+                let _ = self.navigationController?.popViewController(animated: true)
                 return
             } else {
                 let _ = self.navigationController?.popViewController(animated: true)
@@ -141,27 +141,22 @@ class StreamTvVC: UIViewController {
         super.viewWillDisappear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
         player.pause(allowAutoPlay: true)
+        AppDelegate.AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
     }
     
+
     
     override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(.landscape, andRotateTo: .landscapeLeft)
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.isTranslucent = true
+        //navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 
         navigationController?.navigationBar.shadowImage = UIImage()
         
         UIApplication.shared.statusBarStyle = .lightContent
         player.autoPlay()
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // Or to rotate and lock
-        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
-        
     }
     
     deinit {

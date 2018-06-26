@@ -10,13 +10,10 @@ import Foundation
 import UIKit
 import FCCarouselView
 
-protocol HeaderViewDelegate {
-    func didSelectMovie(movie: Movie)
-}
 
 class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
-    var headerDelegate: HeaderViewDelegate?
+    var headerDelegate: MovieDetailDelegate?
     
     var movies = [Movie]()
     var images = [String]()
@@ -45,15 +42,22 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
         }
     }
     
+    private lazy var containerView: CardView = {
+        let view = CardView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private lazy var collectionView: CarouselView = {
         let collectionView = CarouselView()
         collectionView.isHidden = true
+        collectionView.cornerRadius = 5
+        collectionView.clipsToBounds = true
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.pageControlOptions = [.hidden(false), .currentIndicatorTintColor(UIColor.white), .indicatorTintColor(primaryColor)]
         collectionView.registerClass(ImageCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5), cornerRadius: 10)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -75,7 +79,8 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
     private func setupViews(){
         backgroundColor = .clear
-        addSubview(collectionView)
+        addSubview(containerView)
+        containerView.addSubview(collectionView)
         addSubview(playButton)
     }
     
@@ -89,7 +94,8 @@ class MovieHeaderView: UICollectionReusableView, UIScrollViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        collectionView.fill(self)
+        containerView.fill(self)
+        collectionView.fill(containerView)
         
         playButton.centerXAnchor.align(to: centerXAnchor)
         playButton.centerYAnchor.align(to: centerYAnchor)
@@ -109,7 +115,7 @@ extension MovieHeaderView: CarouselViewDelegate{
     
     func carouselView(_ view: CarouselView, didSelectItemAtIndex index: NSInteger) {
         let movie = movies[index]
-        self.headerDelegate?.didSelectMovie(movie: movie)
+        self.headerDelegate?.didShowViewController(movie: movie)
     }
     
 }

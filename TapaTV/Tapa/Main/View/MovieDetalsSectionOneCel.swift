@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol MovieDetailDelegate {
+    func didShowViewController(movie: Movie)
+}
+
 class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
     
-    var movieDetailsVC: MovieDetailsVC?
+    var movieDetaildelegate: MovieDetailDelegate?
     
     var movie: Movie?{
         didSet{
@@ -31,8 +35,6 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         let iv = DesignableImageView()
         iv.contentMode = .scaleAspectFill
         iv.cornerRadius = 10
-        iv.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 0.5)
-        iv.elevate(elevation: 2.0, shadowColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), cornerRadius: 10)
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -122,6 +124,12 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         return label
     }()
     
+    private lazy var containerView: CardView = {
+        let view = CardView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -142,22 +150,18 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
     
     @objc private func handlePlayVideo(){
         guard let movie = movie else {return}
-        let vc = StreamTvVC()
-        vc.video = movie.video
-        let nav = NavigationController(rootViewController: vc)
-        nav.shouldLandscape = true
-        movieDetailsVC?.present(nav, animated: true, completion: nil)
-        
+        movieDetaildelegate?.didShowViewController(movie: movie)
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        [videoThumbNail, categoryLabel, movieTitleLabel,
+        backgroundColor = .clear
+        [containerView, categoryLabel, movieTitleLabel,
          parentalGuardLabel, durationLabel, releaseDateLabel,
          ratingLabel, descriptionLabel, castLabel, collectionView, playButton].forEach{contentView.addSubview($0)}
-        backgroundColor = .clear
-        //        descriptionLabel.backgroundColor = .red
+        containerView.addSubview(videoThumbNail)
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -180,10 +184,12 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
             width = frame.width
         }
         
-        videoThumbNail.topAnchor.align(to: topAnchor, offset: 20)
-        videoThumbNail.leftAnchor.align(to: leftAnchor, offset: 10)
-        videoThumbNail.rightAnchor.align(to: rightAnchor, offset: -10)
-        videoThumbNail.heightAnchor.equal(to: Constant.isCompact(view: self, yes: 150, no: 250))
+        containerView.topAnchor.align(to: topAnchor, offset: 20)
+        containerView.leftAnchor.align(to: leftAnchor, offset: 10)
+        containerView.rightAnchor.align(to: rightAnchor, offset: -10)
+        containerView.heightAnchor.equal(to: Constant.isCompact(view: self, yes: 150, no: 250))
+        
+        videoThumbNail.fill(containerView)
         
         categoryLabel.leftAnchor.align(to: leftAnchor, offset: 10)
         categoryLabel.topAnchor.align(to: videoThumbNail.bottomAnchor, offset: 15)

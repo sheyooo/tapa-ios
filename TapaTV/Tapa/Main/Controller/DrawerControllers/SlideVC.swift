@@ -12,15 +12,6 @@ class SlideVC: UITableViewController {
 
     let menuTitles = ["MY ACCOUNT", "SETTINGS", "FAQs", "SIGN OUT"]
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
-        return orientation
-    }
-    
-    override var shouldAutorotate: Bool{
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)

@@ -258,14 +258,6 @@ class SignupVC: ValidatorViewController {
         return true
     }
     
-    override var shouldAutorotate: Bool{
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupContraints()

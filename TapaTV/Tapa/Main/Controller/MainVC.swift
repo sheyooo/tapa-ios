@@ -27,46 +27,20 @@ class MainVC: UIViewController {
     
     fileprivate let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
-    fileprivate lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "search_icon").maskWithColor(color: .white), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(handleSearchClick), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var searchView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 100, height: 36))
+        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+        view.layer.cornerRadius = 18
+        return view
     }()
     
-    fileprivate lazy var menuButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "Menu"), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(handleMenuToggle), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = type.uppercased()
-        label.textColor = .white
-        let titleSize = Constant.isCompact(view: view, yes: 18, no: 20)
-        label.font = UIFont(name: "Avenir", size: CGFloat(titleSize))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var filterButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .clear
-        
-        var attr = [NSAttributedStringKey.underlineStyle : 1, NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)] as [NSAttributedStringKey : Any]
-        var attributedString = NSMutableAttributedString(string:"")
-        let buttonTitleStr = NSMutableAttributedString(string:"Filter", attributes: attr)
-        attributedString.append(buttonTitleStr)
-        button.setAttributedTitle(attributedString, for: .normal)
-        button.addTarget(self, action: #selector(handleMoreFilter), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var searchTextField: UITextField = {
+        let tf = UITextField(frame: CGRect(x: 10, y: 0, width: searchView.frame.width - 10, height: 36))
+        let titleSize = Constant.isCompact(view: view, yes: 14, no: 14)
+        tf.font = UIFont(name: "Avenir", size: CGFloat(titleSize))
+        tf.borderStyle = .none
+        tf.placeholder = "Type location"
+        return tf
     }()
     
     private lazy var collectionView: UICollectionView = {
@@ -85,6 +59,13 @@ class MainVC: UIViewController {
         return indicator
     }()
     
+    private lazy var refereshControl: UIRefreshControl = {
+       let rc = UIRefreshControl()
+        rc.attributedTitle = NSAttributedString(string: "Fetching Movies...", attributes: [.font: UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.white])
+        rc.addTarget(self, action: #selector(fetchMovies), for: .valueChanged)
+        return rc
+    }()
+    
     @objc private func handleMenuToggle(){
         let vc = SlideVC()
         let navVC = UISideMenuNavigationController(rootViewController: vc)
@@ -92,7 +73,7 @@ class MainVC: UIViewController {
         present(navVC, animated: true, completion: nil)
     }
     
-    @objc private func handleMoreFilter(){
+    @objc private func handleMoreFilter(sender: UIBarButtonItem){
         if movies.count == 0 {
             return
         }
@@ -109,7 +90,7 @@ class MainVC: UIViewController {
         popover.cornerRadius = 10
         DispatchQueue.main.async {
             self.popOverTableView.sizeToFit()
-            self.popover.show(self.popOverTableView, fromView: self.filterButton)
+            self.popover.show(self.popOverTableView, fromView: sender.view!)
         }
     }
     
@@ -122,12 +103,13 @@ class MainVC: UIViewController {
         navigationController?.pushViewController(vc, animated: false)
     }
     
-    private func fetchMovies() {
+    @objc private func fetchMovies() {
         activityIndicator.startAnimating()
         ApiService.shared.fetchContentList(type: type) { (contents, message) in
             self.collectionView.emptyDataSetDataSource = self
             self.collectionView.emptyDataSetDelegate = self
             self.activityIndicator.stopAnimating()
+            self.refereshControl.endRefreshing()
             self.setupCollectionView()
             if contents == nil {
                 self.collectionView.reloadData()
@@ -144,30 +126,29 @@ class MainVC: UIViewController {
         return .lightContent
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.all]
-        return orientation
-    }
-    
-    override var shouldAutorotate: Bool{
-        return true
-    }
-    
     override func viewDidLoad() {
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         //navigationItem.title = "MOVIES"
         
-        let searchBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "search_icon"), style: .plain, target: self, action: #selector(handleSearchClick))
-        searchBarButton.tintColor = .white
-        self.navigationItem.rightBarButtonItem = searchBarButton
+        let filterBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(handleMoreFilter))
+        filterBarButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = filterBarButton
         
         let menuBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Menu"), style: .plain, target: self, action: #selector(handleMenuToggle))
         menuBarButton.tintColor = .white
         self.navigationItem.leftBarButtonItem = menuBarButton
         
-        [titleLabel, filterButton, collectionView, activityIndicator].forEach {view.addSubview($0)}
+        [collectionView, activityIndicator].forEach {view.addSubview($0)}
+        searchView.addSubview(searchTextField)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 15))
+        imageView.image = #imageLiteral(resourceName: "search_icon")
+        imageView.contentMode = .scaleAspectFit
+        searchTextField.leftViewMode = .always
+        searchTextField.leftView = imageView
+        searchTextField.addTarget(self, action: #selector(handleSearchClick), for: .touchDown)
+        
+        navigationItem.titleView = searchView
         
         fetchMovies()
         
@@ -177,13 +158,10 @@ class MainVC: UIViewController {
     private func setupCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.refreshControl = refereshControl
         collectionView.register(NowCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(MovieHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView")
 
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     @objc func deviceRotated(){
@@ -207,25 +185,13 @@ class MainVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        //AppUtility.lockOrientation(.all)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let size: CGFloat =  Constant.isCompact(view: view, yes: 45, no: 65)
         
-        titleLabel.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
-        titleLabel.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor, offset: 20)
-        titleLabel.heightAnchor.equal(to: size)
-        titleLabel.widthAnchor.equal(to: 150)
-        
-        filterButton.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
-        filterButton.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor, offset: -20)
-        filterButton.heightAnchor.equal(to: size)
-        filterButton.widthAnchor.equal(to: 80)
-        
-        collectionView.topAnchor.align(to: titleLabel.bottomAnchor, offset: 10)
+        collectionView.topAnchor.align(to: view.layoutMarginsGuide.topAnchor, offset: 10)
         collectionView.leftAnchor.align(to: view.layoutMarginsGuide.leftAnchor)
         collectionView.rightAnchor.align(to: view.layoutMarginsGuide.rightAnchor)
         collectionView.bottomAnchor.align(to: view.layoutMarginsGuide.bottomAnchor)
@@ -234,33 +200,6 @@ class MainVC: UIViewController {
         activityIndicator.centerXAnchor.align(to: view.centerXAnchor)
         activityIndicator.widthAnchor.equal(to: 40)
         activityIndicator.heightAnchor.equal(to: 40)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            
-            let orient = UIApplication.shared.statusBarOrientation
-            
-            switch orient {
-                
-            case .portrait:
-                
-                print("Portrait")
-                
-            case .landscapeLeft, .landscapeRight :
-                
-                print("Landscape")
-                
-            default:
-                
-                print("Anything But Portrait")
-            }
-            
-        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            //refresh view once rotation is completed not in will transition as it returns incorrect frame size.Refresh here
-            
-        })
-        super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
@@ -286,7 +225,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.item]
-        didSelectMovie(movie: movie)
+        didShowViewController(movie: movie)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -296,6 +235,8 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             // Create Header
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView", for: indexPath) as! MovieHeaderView
             headerView.type = type
+            headerView.layer.cornerRadius = 10
+            headerView.clipsToBounds = true
             headerView.headerDelegate = self
             reusableView = headerView
         }
@@ -340,13 +281,17 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
 }
 
-extension MainVC: HeaderViewDelegate {
+extension MainVC: MovieDetailDelegate {
     
-    func didSelectMovie(movie: Movie) {
+    
+    func didShowViewController(movie: Movie) {
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = ""
+        backButtonItem.tintColor = .white
+        navigationItem.backBarButtonItem = backButtonItem
         let vc = MovieDetailsVC()
         vc.movie = movie
-        let nav = NavigationController(rootViewController: vc)
-        present(nav, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
