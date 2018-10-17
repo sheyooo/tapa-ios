@@ -309,7 +309,7 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
     }
     
     internal class func presentMenuComplete() {
-        NotificationCenter.default.addObserver(SideMenuTransition.singleton, selector:#selector(SideMenuTransition.applicationDidEnterBackgroundNotification), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(SideMenuTransition.singleton, selector:#selector(SideMenuTransition.applicationDidEnterBackgroundNotification), name: UIApplication.didEnterBackgroundNotification, object: nil)
         guard let mainViewController = SideMenuTransition.viewControllerForPresentedMenu else {
             return
         }
@@ -433,7 +433,7 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
                     container.insertSubview(topView, at: 0)
                 }
                 if let statusBarView = SideMenuTransition.statusBarView {
-                    container.bringSubview(toFront: statusBarView)
+                    container.bringSubviewToFront(statusBarView)
                 }
                 
                 return

@@ -224,14 +224,14 @@ extension UIImage {
 extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return ceil(boundingBox.height)
     }
     
     func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return ceil(boundingBox.width)
     }
@@ -269,7 +269,7 @@ extension TimeInterval {
 
 extension NSMutableAttributedString {
     @discardableResult func bold(_ text: String, font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedStringKey: Any] = [.font: font, .foregroundColor: textColor]
+        let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: textColor]
         let boldString = NSMutableAttributedString(string:text, attributes: attrs)
         append(boldString)
         
@@ -277,7 +277,7 @@ extension NSMutableAttributedString {
     }
     
     @discardableResult func normal(_ text: String, font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
-        let attrs: [NSAttributedStringKey: Any] = [.font: font, .foregroundColor: textColor]
+        let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: textColor]
         let normal = NSAttributedString(string: text, attributes: attrs)
         append(normal)
         

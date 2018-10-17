@@ -116,7 +116,7 @@ class LoginVC: ValidatorViewController {
         textField.text = "sheyiadekoya@gmail.com"
         textField.autocapitalizationType = .none
         textField.attributedPlaceholder = NSAttributedString(string: "Email or Phone Number",
-                                                             attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
+                                                             attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -144,7 +144,7 @@ class LoginVC: ValidatorViewController {
         textField.borderStyle = .none
         textField.text = "password"
         textField.attributedPlaceholder = NSAttributedString(string: "Password",
-                                                             attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
+                                                             attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5863923373)])
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -188,9 +188,9 @@ class LoginVC: ValidatorViewController {
     }()
     
     var attrs = [
-        NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16.0),
-        NSAttributedStringKey.foregroundColor : UIColor.white,
-        NSAttributedStringKey.underlineStyle : 1] as [NSAttributedStringKey : Any]
+        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16.0),
+        NSAttributedString.Key.foregroundColor : UIColor.white,
+        NSAttributedString.Key.underlineStyle : 1] as [NSAttributedString.Key : Any]
     
     var attributedString = NSMutableAttributedString(string:"")
     

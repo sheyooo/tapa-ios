@@ -39,7 +39,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2666666667, alpha: 1)
         
         navigationItem.title = "PROFILE"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         ApiService.shared.loadRememberedUser()
         
@@ -96,7 +96,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }else if indexPath.item == 1 {
             return 185 + 20 + 80 + 80
         }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
 }

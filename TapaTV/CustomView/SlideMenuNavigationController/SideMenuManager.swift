@@ -97,23 +97,23 @@ open class SideMenuManager : NSObject {
     open static var menuPresentingViewControllerUserInteractionEnabled: Bool = false
     
     /// The strength of the parallax effect on the existing view controller. Does not apply to `menuPresentMode` when set to `ViewSlideOut`. Default is 0.
-    open static var menuParallaxStrength: Int = 0
+    public static var menuParallaxStrength: Int = 0
     
     /// Draws the `menuAnimationBackgroundColor` behind the status bar. Default is true.
-    open static var menuFadeStatusBar = true
+    public static var menuFadeStatusBar = true
     
     /// The animation options when a menu is displayed. Ignored when displayed with a gesture.
-    open static var menuAnimationOptions: UIViewAnimationOptions = .curveEaseInOut
+    public static var menuAnimationOptions: UIView.AnimationOptions = .curveEaseInOut
     
     /// The animation spring damping when a menu is displayed. Ignored when displayed with a gesture.
-    open static var menuAnimationUsingSpringWithDamping: CGFloat = 1
+    public static var menuAnimationUsingSpringWithDamping: CGFloat = 1
     
     /// The animation initial spring velocity when a menu is displayed. Ignored when displayed with a gesture.
-    open static var menuAnimationInitialSpringVelocity: CGFloat = 1
+    public static var menuAnimationInitialSpringVelocity: CGFloat = 1
     
     /// -Warning: Deprecated. Use `menuPushStyle = .subMenu` instead.
     @available(*, deprecated, renamed: "menuPushStyle", message: "Use `menuPushStyle = .subMenu` instead.")
-    open static var menuAllowSubmenus: Bool {
+    public static var menuAllowSubmenus: Bool {
         get {
             return menuPushStyle == .subMenu
         }
@@ -169,7 +169,7 @@ open class SideMenuManager : NSObject {
      
      - Note: If you want cells in a UITableViewController menu to show vibrancy, make them a subclass of UITableViewVibrantCell.
      */
-    open static var menuBlurEffectStyle: UIBlurEffectStyle? {
+    public static var menuBlurEffectStyle: UIBlurEffect.Style? {
         didSet {
             if oldValue != menuBlurEffectStyle {
                 updateMenuBlurIfNecessary()
@@ -259,7 +259,7 @@ open class SideMenuManager : NSObject {
         guard let forMenu = forMenu,
             let menuBlurEffectStyle = menuBlurEffectStyle,
             let view = forMenu.visibleViewController?.view
-            , !UIAccessibilityIsReduceTransparencyEnabled() else {
+            , !UIAccessibility.isReduceTransparencyEnabled else {
                 return
         }
         

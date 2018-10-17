@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var orientationLock = UIInterfaceOrientationMask.portrait
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
         
         UITabBar.appearance().tintColor = #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 1)
         UITabBar.appearance().barTintColor = #colorLiteral(red: 0.1977315053, green: 0.2017299144, blue: 0.262745098, alpha: 1)

@@ -153,7 +153,7 @@ class MovieDetalsSectionOneCel: UITableViewCell, UICollectionViewDelegate, UICol
         movieDetaildelegate?.didShowViewController(movie: movie)
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = .clear

@@ -9,7 +9,7 @@ target 'TapaTV' do
   pod 'Player', '~> 0.8.0'
   pod 'ScalingCarousel'
   pod 'PasswordTextField'
-  pod 'IQKeyboardManagerSwift', '5.0.0'
+  pod 'IQKeyboardManagerSwift', '~> 6.0.4'
   pod 'Alamofire', '~> 4.5'
   pod 'AlamofireImage', '~> 3.3'
   pod 'KVNProgress', '~> 2.3.1'
@@ -21,5 +21,5 @@ target 'TapaTV' do
   pod 'BMPlayer', '~> 1.0.0'
   pod 'NVActivityIndicatorView'
   pod 'TBEmptyDataSet'
-  pod 'ZFPlayer'
+  pod 'ZFPlayer', '~> 3.0'
 end

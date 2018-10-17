@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9DE4CBC84678738949BAF32715AB8C16"
+               BlueprintIdentifier = "CB5276EC10E0E12D263F605DC87BA8B4"
                BlueprintName = "EGFormValidator"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "EGFormValidator.framework">

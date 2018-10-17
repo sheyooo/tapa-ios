@@ -162,7 +162,7 @@ class SportVC: UIViewController {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
 }
@@ -174,11 +174,11 @@ extension SportVC: TBEmptyDataSetDelegate, TBEmptyDataSetDataSource {
     }
     
     func titleForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "Something went wrong!", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18)])
+        return NSAttributedString(string: "Something went wrong!", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
     }
     
     func descriptionForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: " Please check that you are connected to the internet.\n\n Tap to retry!", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)])
+        return NSAttributedString(string: " Please check that you are connected to the internet.\n\n Tap to retry!", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)])
     }
     
     func emptyDataSetTapEnabled(in scrollView: UIScrollView) -> Bool {

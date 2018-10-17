@@ -77,14 +77,14 @@ open class CarouselView: UIView {
         pageControl.frame.size.height = size.height
         pageControl.frame.origin.y = self.bounds.height - size.height
         if pageCount < 2 { return }
-        collectionView.scrollToItem(at: IndexPath(row: pageControl.currentPage+1, section: 0), at: UICollectionViewScrollPosition(), animated: false)
+        collectionView.scrollToItem(at: IndexPath(row: pageControl.currentPage+1, section: 0), at: UICollectionView.ScrollPosition(), animated: false)
     }
     
     fileprivate func startTimer() {
         if !enableAutoScroll { return }
         timer?.invalidate()
         timer = Timer(timeInterval: timeInterval, target: self, selector: #selector(scrollNextPage), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+        RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
     }
     
     @objc func scrollNextPage() {

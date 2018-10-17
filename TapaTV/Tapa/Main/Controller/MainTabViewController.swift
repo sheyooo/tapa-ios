@@ -35,8 +35,8 @@ class MainTabViewController: UITabBarController {
         //35 35 35
         setupBarItems()
         let tabBarItemApperance = UITabBarItem.appearance()
-        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: UIColor.gray], for: .normal)
-        tabBarItemApperance.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 1)], for: .selected)
+        tabBarItemApperance.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
+        tabBarItemApperance.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir-Black", size: 10)!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.8588235294, green: 0.1921568627, blue: 0.4039215686, alpha: 1)], for: .selected)
     }
     
     private func setupBarItems(){

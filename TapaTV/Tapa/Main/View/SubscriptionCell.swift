@@ -155,7 +155,7 @@ public class SubscriptionCell: UITableViewCell, STPPaymentCardTextFieldDelegate 
     }
     
     
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(subscriptionView)
         [subscriptionLabel, subscriptionLineView,

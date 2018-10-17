@@ -29,7 +29,7 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = primaryColor
         
         navigationItem.title = "SETTINGS"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         view.addSubview(tableView)
         
@@ -101,7 +101,7 @@ class SettingsCustomCell: UITableViewCell {
         return sw
     }()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         [titleLabel, switchButton].forEach {addSubview($0)}
     }

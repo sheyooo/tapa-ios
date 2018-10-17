@@ -160,18 +160,26 @@ class MainVC: UIViewController {
         collectionView.dataSource = self
         collectionView.refreshControl = refereshControl
         collectionView.register(NowCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.register(MovieHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView")
+        collectionView.register(MovieHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "movieHeaderView")
 
     }
     
     @objc func deviceRotated(){
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+        if UIDeviceOrientation.landscapeLeft == UIDevice.current.orientation {
             print("Landscape")
             // Resize other things
             self.itemsPerRow = 4
             self.collectionView.reloadData()
         }
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+        
+        if UIDeviceOrientation.landscapeRight == UIDevice.current.orientation {
+            print("Landscape")
+            // Resize other things
+            self.itemsPerRow = 4
+            self.collectionView.reloadData()
+        }
+        
+        if UIDeviceOrientation.portrait == UIDevice.current.orientation  {
             print("Portrait")
             // Resize other things
             if !AppDelegate.isiPad() {
@@ -231,9 +239,9 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView : UICollectionReusableView? = nil
         
-        if (kind == UICollectionElementKindSectionHeader) {
+        if (kind == UICollectionView.elementKindSectionHeader) {
             // Create Header
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "movieHeaderView", for: indexPath) as! MovieHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "movieHeaderView", for: indexPath) as! MovieHeaderView
             headerView.type = type
             headerView.layer.cornerRadius = 10
             headerView.clipsToBounds = true
@@ -302,11 +310,11 @@ extension MainVC: TBEmptyDataSetDelegate, TBEmptyDataSetDataSource {
     }
     
     func titleForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "Something went wrong!", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18)])
+        return NSAttributedString(string: "Something went wrong!", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)])
     }
     
     func descriptionForEmptyDataSet(in scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: " Please check that you are connected to the internet.\n\n Tap to retry!", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)])
+        return NSAttributedString(string: " Please check that you are connected to the internet.\n\n Tap to retry!", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)])
     }
     
     func emptyDataSetTapEnabled(in scrollView: UIScrollView) -> Bool {
@@ -341,7 +349,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 
 class CustomCell: UITableViewCell {
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         selectionStyle = .gray

@@ -44,12 +44,12 @@ class StreamTvVC: UIViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationDidEnterBackground),
-                                               name: NSNotification.Name.UIApplicationDidEnterBackground,
+                                               name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationWillEnterForeground),
-                                               name: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
         
         player.backBlock = { [unowned self] (isFullScreen) in
