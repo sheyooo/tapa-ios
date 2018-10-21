@@ -34,7 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = swipingController
             return true
         }
-        window?.rootViewController = MainTabViewController()
+        let controller1 = MainVC()
+        let nav1 = UINavigationController(rootViewController: controller1)
+        
+        window?.rootViewController = nav1
         
         return true
     }
