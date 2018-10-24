@@ -6,20 +6,18 @@ target 'TapaTV' do
   use_frameworks!
 
   # Pods for TapaTV
-  pod 'Player', '~> 0.8.0'
   pod 'ScalingCarousel'
   pod 'PasswordTextField'
   pod 'IQKeyboardManagerSwift', '~> 6.0.4'
   pod 'Alamofire', '~> 4.5'
   pod 'AlamofireImage', '~> 3.3'
   pod 'KVNProgress', '~> 2.3.1'
-  pod 'AlamofireImage', '~> 3.3'
   pod 'FCCarouselView'
   pod 'EGFormValidator'  
   pod 'KeychainAccess'
   pod 'Stripe'
-  pod 'BMPlayer', '~> 1.0.0'
   pod 'NVActivityIndicatorView'
   pod 'TBEmptyDataSet'
-  pod 'ZFPlayer', '~> 3.0'
+  pod 'VersaPlayer'
+  pod 'DateToolsSwift'
 end

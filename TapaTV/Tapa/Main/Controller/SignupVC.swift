@@ -243,7 +243,8 @@ class SignupVC: ValidatorViewController {
     }
     
     @objc fileprivate func handleSkip(button: UIButton){
-        UIApplication.shared.keyWindow?.rootViewController = MainTabViewController()
+        let nav = UINavigationController(rootViewController: MainVC())
+        UIApplication.shared.keyWindow?.rootViewController = nav
     }
     
     private func validateUsername(value: Any?, params: [Any?]) -> Bool{

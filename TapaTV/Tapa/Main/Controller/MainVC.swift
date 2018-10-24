@@ -297,9 +297,10 @@ extension MainVC: MovieDetailDelegate {
         backButtonItem.title = ""
         backButtonItem.tintColor = .white
         navigationItem.backBarButtonItem = backButtonItem
-        let vc = MovieDetailsVC()
-        vc.movie = movie
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = UIStoryboard.init(name: "Player", bundle: nil).instantiateViewController(withIdentifier: "VideoPlayerViewController") as! VideoPlayerViewController
+        vc.video = movie.video
+        present(vc, animated: true, completion: nil)
+        //navigationController?.pushViewController(vc, animated: true)
     }
 }
 

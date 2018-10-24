@@ -14,7 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BMPlayer.xcscheme</key>
+		<key>DateToolsSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -59,22 +59,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Player.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-TapaTV.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>ScalingCarousel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -90,6 +80,11 @@
 			<false/>
 		</dict>
 		<key>TBEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VersaPlayer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

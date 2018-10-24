@@ -250,7 +250,8 @@ class LoginVC: ValidatorViewController {
     }
     
     @objc fileprivate func handleSkip(){
-        UIApplication.shared.keyWindow?.rootViewController = MainTabViewController()
+        let nav = UINavigationController(rootViewController: MainVC())
+        UIApplication.shared.keyWindow?.rootViewController = nav
     }
     
     override func viewWillAppear(_ animated: Bool) {

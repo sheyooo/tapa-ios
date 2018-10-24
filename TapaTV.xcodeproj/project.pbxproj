@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		242BA354EAA70674C31F9182 /* Pods_TapaTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E1B33C1C4D16AB1FC18DC8 /* Pods_TapaTV.framework */; };
+		941A8684217FC98300F5B235 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 941A8683217FC98200F5B235 /* Player.storyboard */; };
+		941A8686217FCC8A00F5B235 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A8685217FCC8A00F5B235 /* VideoPlayerViewController.swift */; };
 		94234F822079737700076BC0 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94234F812079737700076BC0 /* Movie.swift */; };
 		943062E4205E612900D95CDB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943062E3205E612800D95CDB /* Constant.swift */; };
 		943159C9207987A2005CEF3C /* MovieHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943159C8207987A2005CEF3C /* MovieHeaderView.swift */; };
-		943159D7207AC540005CEF3C /* MovieDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943159D6207AC540005CEF3C /* MovieDetailsVC.swift */; };
 		943D07D4205E80D4008AB4D5 /* ShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943D07D3205E80D4008AB4D5 /* ShadowImageView.swift */; };
 		946A2F4F205A0A75003014D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F4E205A0A75003014D3 /* AppDelegate.swift */; };
 		946A2F51205A0A76003014D3 /* StreamTvVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F50205A0A76003014D3 /* StreamTvVC.swift */; };
@@ -24,14 +25,11 @@
 		946A2F76205C0A0B003014D3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F75205C0A0B003014D3 /* GradientView.swift */; };
 		946A2F78205C0A2B003014D3 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F77205C0A2B003014D3 /* GradientButton.swift */; };
 		946A2F7A205C0A4A003014D3 /* TrailerPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */; };
-		946A2F7E205C20DB003014D3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F7D205C20DB003014D3 /* MainTabViewController.swift */; };
 		946A2F84205C21DF003014D3 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F83205C21DF003014D3 /* SearchVC.swift */; };
 		946A2F86205C21FF003014D3 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F85205C21FF003014D3 /* ProfileVC.swift */; };
 		946A2F8F205C22B6003014D3 /* TVHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F8E205C22B6003014D3 /* TVHeaderView.swift */; };
 		946A2F93205C22FD003014D3 /* NowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F92205C22FD003014D3 /* NowCell.swift */; };
 		946A2F97205C2358003014D3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F96205C2358003014D3 /* LoginVC.swift */; };
-		946A2F99205C23EC003014D3 /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946A2F98205C23EC003014D3 /* MovieListVC.swift */; };
-		94850F0A20AB74C400F33B38 /* TVVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0920AB74C400F33B38 /* TVVC.swift */; };
 		94850F0C20AB780500F33B38 /* MovieDetalsSectionOneCel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0B20AB780500F33B38 /* MovieDetalsSectionOneCel.swift */; };
 		94850F0E20AC6E8500F33B38 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0D20AC6E8500F33B38 /* AccountCell.swift */; };
 		94850F1020AC6EA300F33B38 /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94850F0F20AC6EA300F33B38 /* SubscriptionCell.swift */; };
@@ -45,7 +43,6 @@
 		94C6E32020A1404700E22C87 /* SlideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E31F20A1404700E22C87 /* SlideVC.swift */; };
 		94C6E32320A1C66100E22C87 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E32220A1C66100E22C87 /* SettingsVC.swift */; };
 		94C6E32B20A1D25500E22C87 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6E32A20A1D25500E22C87 /* Popover.swift */; };
-		94D001F520D7143C001F9CAC /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D001F420D7143C001F9CAC /* SportVC.swift */; };
 		94D001F720D71B98001F9CAC /* SportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D001F620D71B98001F9CAC /* SportCell.swift */; };
 		94D001F920D71C1E001F9CAC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D001F820D71C1E001F9CAC /* CardView.swift */; };
 		94F2C64D206C540100BD3507 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F2C64C206C540100BD3507 /* SignupVC.swift */; };
@@ -54,10 +51,11 @@
 
 /* Begin PBXFileReference section */
 		6F2EB7EFB04B21777FB56AF6 /* Pods-TapaTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapaTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-TapaTV/Pods-TapaTV.release.xcconfig"; sourceTree = "<group>"; };
+		941A8683217FC98200F5B235 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
+		941A8685217FCC8A00F5B235 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		94234F812079737700076BC0 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		943062E3205E612800D95CDB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		943159C8207987A2005CEF3C /* MovieHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHeaderView.swift; sourceTree = "<group>"; };
-		943159D6207AC540005CEF3C /* MovieDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsVC.swift; sourceTree = "<group>"; };
 		943D07D3205E80D4008AB4D5 /* ShadowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImageView.swift; sourceTree = "<group>"; };
 		946A2F4B205A0A75003014D3 /* TapaTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapaTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946A2F4E205A0A75003014D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,14 +70,11 @@
 		946A2F75205C0A0B003014D3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		946A2F77205C0A2B003014D3 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		946A2F79205C0A4A003014D3 /* TrailerPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPageControl.swift; sourceTree = "<group>"; };
-		946A2F7D205C20DB003014D3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		946A2F83205C21DF003014D3 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		946A2F85205C21FF003014D3 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		946A2F8E205C22B6003014D3 /* TVHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVHeaderView.swift; sourceTree = "<group>"; };
 		946A2F92205C22FD003014D3 /* NowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowCell.swift; sourceTree = "<group>"; };
 		946A2F96205C2358003014D3 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		946A2F98205C23EC003014D3 /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
-		94850F0920AB74C400F33B38 /* TVVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVVC.swift; sourceTree = "<group>"; };
 		94850F0B20AB780500F33B38 /* MovieDetalsSectionOneCel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetalsSectionOneCel.swift; sourceTree = "<group>"; };
 		94850F0D20AC6E8500F33B38 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		94850F0F20AC6EA300F33B38 /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
@@ -93,7 +88,6 @@
 		94C6E31F20A1404700E22C87 /* SlideVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideVC.swift; sourceTree = "<group>"; };
 		94C6E32220A1C66100E22C87 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		94C6E32A20A1D25500E22C87 /* Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
-		94D001F420D7143C001F9CAC /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
 		94D001F620D71B98001F9CAC /* SportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportCell.swift; sourceTree = "<group>"; };
 		94D001F820D71C1E001F9CAC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		94F2C64C206C540100BD3507 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -235,16 +229,13 @@
 			isa = PBXGroup;
 			children = (
 				94C6E32120A1C62900E22C87 /* DrawerControllers */,
-				946A2F7D205C20DB003014D3 /* MainTabViewController.swift */,
 				946A2F50205A0A76003014D3 /* StreamTvVC.swift */,
 				946A2F83205C21DF003014D3 /* SearchVC.swift */,
 				946A2F96205C2358003014D3 /* LoginVC.swift */,
-				946A2F98205C23EC003014D3 /* MovieListVC.swift */,
 				94A8F7D020E28B3E00118F7A /* MainVC.swift */,
 				94F2C64C206C540100BD3507 /* SignupVC.swift */,
-				943159D6207AC540005CEF3C /* MovieDetailsVC.swift */,
-				94850F0920AB74C400F33B38 /* TVVC.swift */,
-				94D001F420D7143C001F9CAC /* SportVC.swift */,
+				941A8683217FC98200F5B235 /* Player.storyboard */,
+				941A8685217FCC8A00F5B235 /* VideoPlayerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -374,6 +365,7 @@
 			files = (
 				946A2F59205A0A76003014D3 /* LaunchScreen.storyboard in Resources */,
 				946A2F56205A0A76003014D3 /* Assets.xcassets in Resources */,
+				941A8684217FC98300F5B235 /* Player.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +399,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TapaTV/Pods-TapaTV-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/EGFormValidator/EGFormValidator.framework",
 				"${BUILT_PRODUCTS_DIR}/FCCarouselView/FCCarouselView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -415,17 +407,16 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/Player/Player.framework",
 				"${BUILT_PRODUCTS_DIR}/ScalingCarousel/ScalingCarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/TBEmptyDataSet/TBEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EGFormValidator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCCarouselView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -433,11 +424,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PasswordTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Player.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScalingCarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TBEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VersaPlayer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -459,28 +449,24 @@
 				946A2F84205C21DF003014D3 /* SearchVC.swift in Sources */,
 				94C6E31C20A13DCF00E22C87 /* SideMenuManager.swift in Sources */,
 				94C6E32020A1404700E22C87 /* SlideVC.swift in Sources */,
-				94D001F520D7143C001F9CAC /* SportVC.swift in Sources */,
 				948B3C882067966E009479B3 /* User.swift in Sources */,
 				946A2F86205C21FF003014D3 /* ProfileVC.swift in Sources */,
 				94C6E31E20A13DE800E22C87 /* SideMenuTransition.swift in Sources */,
 				94C6E32B20A1D25500E22C87 /* Popover.swift in Sources */,
 				94F2C64D206C540100BD3507 /* SignupVC.swift in Sources */,
-				946A2F99205C23EC003014D3 /* MovieListVC.swift in Sources */,
 				946A2F70205C09A4003014D3 /* Page.swift in Sources */,
 				943159C9207987A2005CEF3C /* MovieHeaderView.swift in Sources */,
 				946A2F6D205C0922003014D3 /* TrailerPageViewController.swift in Sources */,
-				943159D7207AC540005CEF3C /* MovieDetailsVC.swift in Sources */,
 				94C6E31420A10FD500E22C87 /* SliderView.swift in Sources */,
 				94D001F720D71B98001F9CAC /* SportCell.swift in Sources */,
 				94A8F7D120E28B3F00118F7A /* MainVC.swift in Sources */,
 				94C6E32320A1C66100E22C87 /* SettingsVC.swift in Sources */,
-				94850F0A20AB74C400F33B38 /* TVVC.swift in Sources */,
 				943062E4205E612900D95CDB /* Constant.swift in Sources */,
+				941A8686217FCC8A00F5B235 /* VideoPlayerViewController.swift in Sources */,
 				946A2F78205C0A2B003014D3 /* GradientButton.swift in Sources */,
 				946A2F51205A0A76003014D3 /* StreamTvVC.swift in Sources */,
 				946A2F93205C22FD003014D3 /* NowCell.swift in Sources */,
 				94C6E31A20A13DB800E22C87 /* UISideMenuNavigationController.swift in Sources */,
-				946A2F7E205C20DB003014D3 /* MainTabViewController.swift in Sources */,
 				946A2F7A205C0A4A003014D3 /* TrailerPageControl.swift in Sources */,
 				946A2F8F205C22B6003014D3 /* TVHeaderView.swift in Sources */,
 				948B3C8520679244009479B3 /* ApiService.swift in Sources */,
