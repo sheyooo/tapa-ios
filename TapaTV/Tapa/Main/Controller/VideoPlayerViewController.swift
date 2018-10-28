@@ -35,7 +35,7 @@ class VideoPlayerViewController: UIViewController {
             timeLabel.text = date.timeAgoSinceNow
         }
         
-        if let url = URL.init(string: "http://www.exit109.com/~dnn/clips/RW20seconds_2.mp4") {
+        if let url = URL.init(string: video.videoUrl) {
             let item = VPlayerItem(url: url)
             player.set(item: item)
         }
